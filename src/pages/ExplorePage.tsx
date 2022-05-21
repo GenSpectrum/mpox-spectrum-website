@@ -5,6 +5,7 @@ import { NamedCard } from '../components/NamedCard';
 import { CountryTable } from '../widgets/CountryTable';
 import { useQuery } from '../helpers/query-hook';
 import { CountryCountSampleData } from '../data/CountryCountSampleDataset';
+import { CoreMetrices } from '../widgets/CoreMetrices';
 
 export const ExplorePage = () => {
   const { selector, setSelector } = useExploreUrl();
@@ -29,6 +30,7 @@ export const ExplorePage = () => {
 
   const mainContent = countryCounts ? (
     <>
+      <CoreMetrices countryCounts={countryCounts} />
       <PackedGrid maxColumns={2}>
         <GridCell minWidth={600}>
           <NamedCard title='Sequences over time'>Plot</NamedCard>

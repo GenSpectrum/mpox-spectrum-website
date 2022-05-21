@@ -1,0 +1,24 @@
+import { globalDateCache, UnifiedDay } from '../helpers/date-cache';
+
+export type FullSampleAggEntry = {
+  date: UnifiedDay | null;
+  region: string | null;
+  country: string | null;
+  division: string | null;
+  host: string | null;
+  clade: string | null;
+  count: number;
+};
+
+export type FullSampleAggEntryField = 'date' | 'region' | 'country' | 'division' | 'host' | 'clade' | 'count';
+
+export type FullSampleAggEntryRaw = Omit<FullSampleAggEntry, 'date'> & {
+  date: string | null;
+};
+
+export function parseFullSampleAggEntry(raw: FullSampleAggEntryRaw): FullSampleAggEntry {
+  return {
+    ...raw,
+    date: raw.date != null ? globalDateCache.getDay(raw.date) : null,
+  };
+}

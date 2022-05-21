@@ -1,13 +1,15 @@
+import { LocationSelect } from './LocationSelect';
+import { LocationSelector } from '../data/LocationSelector';
+
+type Props = {
+  location: LocationSelector;
+  setLocation: (location: LocationSelector) => void;
+};
+
 /**
  * On the top-level, we can filter by the location, host and variant.
  */
-import { LocationSelect } from './LocationSelect';
-import { useState } from 'react';
-import { LocationSelector } from '../data/LocationSelector';
-
-export const TopFilterArea = () => {
-  const [location, setLocation] = useState<LocationSelector>({});
-
+export const TopFilterArea = ({ location, setLocation }: Props) => {
   return (
     <>
       <div className='w-24'>

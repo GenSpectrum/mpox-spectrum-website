@@ -1,10 +1,6 @@
 import { LapisInformation, LapisResponse } from './LapisResponse';
 import dayjs from 'dayjs';
-import { LapisSelector } from './LapisSelector';
-import { addLocationSelectorToUrlSearchParams } from './LocationSelector';
-import { addDateRangeSelectorToUrlSearchParams } from './DateRangeSelector';
-import { addHostSelectorToUrlSearchParams } from './HostSelector';
-import { addVariantSelectorToUrlSearchParams } from './VariantSelector';
+import { addLapisSelectorToUrlSearchParams, LapisSelector } from './LapisSelector';
 import { FullSampleAggEntry, FullSampleAggEntryRaw, parseFullSampleAggEntry } from './FullSampleAggEntry';
 import { addOrderAndLimitToSearchParams, OrderAndLimitConfig } from './OrderAndLimitConfig';
 import { LocationCountSampleEntry } from './LocationCountSampleEntry';
@@ -54,18 +50,7 @@ export async function getLinkTo(
   if (orderAndLimit) {
     addOrderAndLimitToSearchParams(params, orderAndLimit);
   }
-  if (selector.location) {
-    addLocationSelectorToUrlSearchParams(selector.location, params);
-  }
-  if (selector.dateRange) {
-    addDateRangeSelectorToUrlSearchParams(selector.dateRange, params);
-  }
-  if (selector.variant) {
-    addVariantSelectorToUrlSearchParams(selector.variant, params);
-  }
-  if (selector.host) {
-    addHostSelectorToUrlSearchParams(selector.host, params);
-  }
+  addLapisSelectorToUrlSearchParams(selector, params);
   if (downloadAsFile) {
     params.set('downloadAsFile', 'true');
   }

@@ -1,10 +1,17 @@
 import React from 'react';
+import { Header } from './Header';
+import { BrowserRouter } from 'react-router-dom';
 
 function App() {
   return (
-    <div>
-      <h1 className='text-3xl font-bold underline'>This is Mpox-Spectrum.</h1>
-    </div>
+    <BrowserRouter>
+      <div>
+        {/* Header */}
+        <div className='h-32 md:h-20'>
+          <Header />
+        </div>
+      </div>
+    </BrowserRouter>
   );
 }
 

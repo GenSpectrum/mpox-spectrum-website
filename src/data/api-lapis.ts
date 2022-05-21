@@ -4,6 +4,7 @@ import { addLapisSelectorToUrlSearchParams, LapisSelector } from './LapisSelecto
 import { FullSampleAggEntry, FullSampleAggEntryRaw, parseFullSampleAggEntry } from './FullSampleAggEntry';
 import { addOrderAndLimitToSearchParams, OrderAndLimitConfig } from './OrderAndLimitConfig';
 import { LocationCountSampleEntry } from './LocationCountSampleEntry';
+import { CountryCountSampleEntry } from './CountryCountSampleEntry';
 
 const HOST = process.env.REACT_APP_LAPIS_HOST;
 
@@ -81,6 +82,13 @@ export async function fetchAggSamples(
   }
   const body = (await res.json()) as LapisResponse<FullSampleAggEntryRaw[]>;
   return _extractLapisData(body).map(raw => parseFullSampleAggEntry(raw));
+}
+
+export async function fetchCountryCountSamples(
+  selector: LapisSelector,
+  signal?: AbortSignal
+): Promise<CountryCountSampleEntry[]> {
+  return fetchAggSamples(selector, ['country'], signal);
 }
 
 export async function fetchLocationCountSamples(

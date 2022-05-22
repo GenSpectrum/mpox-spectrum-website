@@ -18,6 +18,7 @@ export const SampleListPage = () => {
     { field: 'region', headerName: 'Region', minWidth: 200 },
     { field: 'country', headerName: 'Country', minWidth: 250 },
     { field: 'clade', headerName: 'Clade', minWidth: 100 },
+    { field: 'host', headerName: 'Host', minWidth: 200 },
   ];
 
   const rows = useMemo(() => {

@@ -150,6 +150,7 @@ export async function fetchDetailsSamples(
     region: x.region,
     country: x.country,
     clade: x.clade,
+    host: x.host,
   }));
 }
 

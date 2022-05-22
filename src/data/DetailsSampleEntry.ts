@@ -7,4 +7,5 @@ export type DetailsSampleEntry = {
   region: string | null;
   country: string | null;
   clade: string | null;
+  host: string | null;
 };

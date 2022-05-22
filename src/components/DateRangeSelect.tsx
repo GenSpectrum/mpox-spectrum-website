@@ -8,12 +8,12 @@ export interface Props {
 }
 
 export const DateRangeSelect = ({ selected, onSelect }: Props) => {
-  const options = ['All times', '2022-outbreak'];
+  const options = ['All times', '2022'];
   let selectedOption;
   if (!selected.dateFrom && !selected.dateTo) {
     selectedOption = 'All times';
   } else if (selected.dateFrom === globalDateCache.getDay('2022-01-01') && !selected.dateTo) {
-    selectedOption = '2022-outbreak';
+    selectedOption = '2022';
   } else {
     selectedOption = 'Custom';
   }
@@ -30,7 +30,7 @@ export const DateRangeSelect = ({ selected, onSelect }: Props) => {
       onChange={(event: any, newValue: any) => {
         if (newValue === 'All times') {
           onSelect({});
-        } else if (newValue === '2022-outbreak') {
+        } else if (newValue === '2022') {
           onSelect({ dateFrom: globalDateCache.getDay('2022-01-01') });
         }
       }}

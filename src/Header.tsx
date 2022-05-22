@@ -91,7 +91,7 @@ export const Header = () => {
                 </a>
                 <a
                   className={getDropdownButtonClasses('')}
-                  href='https://twitter.com/covSpectrum'
+                  href='https://twitter.com/genSpectrum'
                   rel='noopener noreferrer'
                   target='_blank'
                 >
@@ -134,7 +134,7 @@ export const Header = () => {
                   <a className={getButtonClasses('/about')} href='/about'>
                     About
                   </a>
-                  <ExternalLink url='https://twitter.com/covSpectrum'>
+                  <ExternalLink url='https://twitter.com/genSpectrum'>
                     <AiOutlineTwitter
                       className='hidden md:block fill-current rounded-xl filter shadow-xl cursor-pointer ml-1 lg:ml-8 hover:opacity-70'
                       size={'1.5em'}

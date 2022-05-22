@@ -11,8 +11,8 @@ export const AboutPage = () => {
         </ExternalLink>{' '}
         in Switzerland (Chaoran Chen and Tanja Stadler). The monkeypox data is pre-processed and aligned by
         members of the <ExternalLink url='(https://nextstrain.org/'>NextStrain team</ExternalLink> (Emma
-        Hodcroft and Richard Neher). We acknowledge the teams around the world sharing data openly on genbank
-        in real time during this outbreak. We express our sincere gratitude.
+        Hodcroft, Cornelius Roemer, Richard Neher). We acknowledge the teams around the world sharing data
+        openly on genbank in real time during this outbreak. We express our sincere gratitude.
       </p>
     </div>
   );

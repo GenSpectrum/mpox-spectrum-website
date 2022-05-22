@@ -14,6 +14,10 @@ export interface Props {
 export const LocationSelect = ({ selected, onSelect }: Props) => {
   const geoOptions: { group: string; place: string; code?: string }[] = [{ group: 'World', place: 'World' }];
   geoOptions.push(
+    ...LocationService.getRegions().map(region => ({
+      group: 'Regions',
+      place: region,
+    })),
     ...LocationService.getCountries().map(country => ({
       group: 'Countries',
       place: country,

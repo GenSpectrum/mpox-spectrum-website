@@ -134,7 +134,6 @@ const Metric = ({
   helpText,
   showPercent,
 }: MetricProps): JSX.Element => {
-  const tooltipId = 'metric-tooltip-' + title;
   return (
     <MetricWrapper id='metric-with-tooltip'>
       <>

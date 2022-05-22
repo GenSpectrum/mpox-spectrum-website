@@ -9,6 +9,8 @@ import { SequenceType } from './MutationDataset';
 import { MutationEntry } from './MutationEntry';
 import { DetailsSampleEntry } from './DetailsSampleEntry';
 import { globalDateCache } from '../helpers/date-cache';
+import { CladeCountSampleEntry } from './CladeCountSampleEntry';
+import { HostCountSampleEntry } from './HostCountSampleEntry';
 
 const HOST = process.env.REACT_APP_LAPIS_HOST;
 
@@ -93,6 +95,20 @@ export async function fetchCountryCountSamples(
   signal?: AbortSignal
 ): Promise<CountryCountSampleEntry[]> {
   return fetchAggSamples(selector, ['country'], signal);
+}
+
+export async function fetchCladeCountSamples(
+  selector: LapisSelector,
+  signal?: AbortSignal
+): Promise<CladeCountSampleEntry[]> {
+  return fetchAggSamples(selector, ['clade'], signal);
+}
+
+export async function fetchHostCountSamples(
+  selector: LapisSelector,
+  signal?: AbortSignal
+): Promise<HostCountSampleEntry[]> {
+  return fetchAggSamples(selector, ['host'], signal);
 }
 
 export async function fetchLocationCountSamples(

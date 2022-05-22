@@ -19,6 +19,9 @@ export function useExploreUrl(): ExploreUrl {
         division: searchParam.get('division') ?? undefined,
       },
       host: searchParam.get('host')?.split(','),
+      variant: {
+        clade: searchParam.get('clade') ?? undefined,
+      },
     }),
     [searchParam]
   );

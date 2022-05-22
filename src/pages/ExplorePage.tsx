@@ -31,6 +31,8 @@ export const ExplorePage = () => {
         <TopFilterArea
           location={selector.location!}
           setLocation={newLocation => setSelector({ ...selector, location: newLocation })}
+          variant={selector.variant!}
+          setVariant={newVariant => setSelector({ ...selector, variant: newVariant })}
         />
       </div>
     </>

@@ -1,6 +1,6 @@
 export type VariantSelector = {
   clade?: string;
-  nucMutations: string[];
+  nucMutations?: string[];
 };
 
 export function addVariantSelectorToUrlSearchParams(

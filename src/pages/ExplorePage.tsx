@@ -9,6 +9,7 @@ import { CoreMetrices } from '../widgets/CoreMetrices';
 import { MutationData } from '../data/MutationDataset';
 import { MutationList } from '../widgets/MutationList';
 import { TopButtons } from '../components/TopButtons';
+import { LapisNote } from '../components/LapisNote';
 
 export const ExplorePage = () => {
   const { selector, setSelector } = useExploreUrl();
@@ -74,6 +75,7 @@ export const ExplorePage = () => {
 
   return (
     <>
+      <LapisNote />
       {topFilters}
       {topButtons}
       {mainContent}

@@ -5,6 +5,8 @@ import { FullSampleAggEntry, FullSampleAggEntryRaw, parseFullSampleAggEntry } fr
 import { addOrderAndLimitToSearchParams, OrderAndLimitConfig } from './OrderAndLimitConfig';
 import { LocationCountSampleEntry } from './LocationCountSampleEntry';
 import { CountryCountSampleEntry } from './CountryCountSampleEntry';
+import { SequenceType } from './MutationDataset';
+import { MutationEntry } from './MutationEntry';
 
 const HOST = process.env.REACT_APP_LAPIS_HOST;
 
@@ -96,6 +98,27 @@ export async function fetchLocationCountSamples(
   signal?: AbortSignal
 ): Promise<LocationCountSampleEntry[]> {
   return fetchAggSamples(selector, ['division', 'country', 'region'], signal);
+}
+
+export async function fetchMutations(
+  selector: LapisSelector,
+  sequenceType: SequenceType,
+  signal?: AbortSignal
+): Promise<MutationEntry[]> {
+  const linkPrefix = await getLinkTo(
+    `${sequenceType}-mutations`,
+    selector,
+    undefined,
+    undefined,
+    undefined,
+    true
+  );
+  const res = await get(`${linkPrefix}`, signal);
+  if (!res.ok) {
+    throw new Error('Error fetching new data!!');
+  }
+  const body = (await res.json()) as LapisResponse<MutationEntry[]>;
+  return _extractLapisData(body);
 }
 
 function _extractLapisData<T>(response: LapisResponse<T>): T {

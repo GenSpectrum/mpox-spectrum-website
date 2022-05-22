@@ -52,7 +52,7 @@ export const ExplorePage = () => {
         <CoreMetrices countryCounts={countryCounts} />
         <PackedGrid maxColumns={2}>
           <GridCell minWidth={600}>
-            <NamedCard title='Sequences over time'>Plot</NamedCard>
+            <NamedCard title='Sequences over time'>Under construction</NamedCard>
           </GridCell>
           {!selector.location?.country && (
             <GridCell minWidth={600}>

@@ -1,6 +1,7 @@
 import { addLapisSelectorToUrlSearchParams, LapisSelector } from '../data/LapisSelector';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useCallback, useMemo } from 'react';
+import { globalDateCache } from './date-cache';
 
 export type ExploreUrl = {
   selector: LapisSelector;
@@ -11,8 +12,10 @@ export function useExploreUrl(): ExploreUrl {
   const searchString = useLocation().search;
   const searchParam = useMemo(() => new URLSearchParams(searchString), [searchString]);
 
-  const selector: LapisSelector = useMemo(
-    () => ({
+  const selector: LapisSelector = useMemo(() => {
+    const dateFromString = searchParam.get('dateFrom');
+    const dateToString = searchParam.get('dateTo');
+    return {
       location: {
         region: searchParam.get('region') ?? undefined,
         country: searchParam.get('country') ?? undefined,
@@ -22,9 +25,12 @@ export function useExploreUrl(): ExploreUrl {
       variant: {
         clade: searchParam.get('clade') ?? undefined,
       },
-    }),
-    [searchParam]
-  );
+      dateRange: {
+        dateFrom: dateFromString ? globalDateCache.getDay(dateFromString) : undefined,
+        dateTo: dateToString ? globalDateCache.getDay(dateToString) : undefined,
+      },
+    };
+  }, [searchParam]);
 
   const navigate = useNavigate();
   const setSelector = useCallback(

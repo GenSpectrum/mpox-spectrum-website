@@ -33,6 +33,8 @@ export const ExplorePage = () => {
           setLocation={newLocation => setSelector({ ...selector, location: newLocation })}
           variant={selector.variant!}
           setVariant={newVariant => setSelector({ ...selector, variant: newVariant })}
+          dateRange={selector.dateRange!}
+          setDateRange={newDateRange => setSelector({ ...selector, dateRange: newDateRange })}
         />
       </div>
     </>

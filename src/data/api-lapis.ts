@@ -40,7 +40,7 @@ export function getCurrentLapisDataVersionDate(): Date | undefined {
   return currentLapisDataVersion !== undefined ? dayjs.unix(currentLapisDataVersion).toDate() : undefined;
 }
 
-export async function getLinkTo(
+export function getLinkTo(
   endpoint: string,
   selector: LapisSelector,
   orderAndLimit?: OrderAndLimitConfig,
@@ -48,7 +48,7 @@ export async function getLinkTo(
   dataFormat?: string,
   omitHost = false,
   minProportion?: string
-): Promise<string> {
+): string {
   const params = new URLSearchParams();
   if (orderAndLimit) {
     addOrderAndLimitToSearchParams(params, orderAndLimit);

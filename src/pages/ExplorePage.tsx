@@ -8,6 +8,7 @@ import { CountryCountSampleData } from '../data/CountryCountSampleDataset';
 import { CoreMetrices } from '../widgets/CoreMetrices';
 import { MutationData } from '../data/MutationDataset';
 import { MutationList } from '../widgets/MutationList';
+import { TopButtons } from '../components/TopButtons';
 
 export const ExplorePage = () => {
   const { selector, setSelector } = useExploreUrl();
@@ -33,6 +34,12 @@ export const ExplorePage = () => {
         />
       </div>
     </>
+  );
+
+  const topButtons = (
+    <div className='m-8'>
+      <TopButtons selector={selector} />
+    </div>
   );
 
   const mainContent =
@@ -64,6 +71,7 @@ export const ExplorePage = () => {
   return (
     <>
       {topFilters}
+      {topButtons}
       {mainContent}
     </>
   );

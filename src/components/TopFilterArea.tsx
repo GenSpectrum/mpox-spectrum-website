@@ -11,10 +11,10 @@ type Props = {
  */
 export const TopFilterArea = ({ location, setLocation }: Props) => {
   return (
-    <>
+    <div className='flex flex-row flex-wrap'>
       <div className='w-24'>
         <LocationSelect selected={location} onSelect={newLocation => setLocation(newLocation)} />
       </div>
-    </>
+    </div>
   );
 };

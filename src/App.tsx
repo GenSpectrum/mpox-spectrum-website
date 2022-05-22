@@ -5,6 +5,7 @@ import { AboutPage } from './pages/AboutPage';
 import { ExplorePage } from './pages/ExplorePage';
 import { getCurrentLapisDataVersionDate } from './data/api-lapis';
 import dayjs from 'dayjs';
+import { SampleListPage } from './pages/SampleListPage';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Navigate to='explore' />} />
           <Route path='explore' element={<ExplorePage />} />
+          <Route path='samples' element={<SampleListPage />} />
           <Route path='about' element={<AboutPage />} />
         </Routes>
       </div>

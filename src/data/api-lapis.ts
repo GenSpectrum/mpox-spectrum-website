@@ -7,6 +7,8 @@ import { LocationCountSampleEntry } from './LocationCountSampleEntry';
 import { CountryCountSampleEntry } from './CountryCountSampleEntry';
 import { SequenceType } from './MutationDataset';
 import { MutationEntry } from './MutationEntry';
+import { DetailsSampleEntry } from './DetailsSampleEntry';
+import { globalDateCache } from '../helpers/date-cache';
 
 const HOST = process.env.REACT_APP_LAPIS_HOST;
 
@@ -105,20 +107,34 @@ export async function fetchMutations(
   sequenceType: SequenceType,
   signal?: AbortSignal
 ): Promise<MutationEntry[]> {
-  const linkPrefix = await getLinkTo(
-    `${sequenceType}-mutations`,
-    selector,
-    undefined,
-    undefined,
-    undefined,
-    true
-  );
-  const res = await get(`${linkPrefix}`, signal);
+  const link = await getLinkTo(`${sequenceType}-mutations`, selector, undefined, undefined, undefined, true);
+  const res = await get(link, signal);
   if (!res.ok) {
     throw new Error('Error fetching new data!!');
   }
   const body = (await res.json()) as LapisResponse<MutationEntry[]>;
   return _extractLapisData(body);
+}
+
+export async function fetchDetailsSamples(
+  selector: LapisSelector,
+  signal?: AbortSignal
+): Promise<DetailsSampleEntry[]> {
+  const link = await getLinkTo(`details`, selector, undefined, undefined, undefined, true);
+  const res = await get(link, signal);
+  if (!res.ok) {
+    throw new Error('Error fetching new data!!');
+  }
+  const rawBody = (await res.json()) as LapisResponse<any[]>;
+  const rawData = _extractLapisData(rawBody);
+  return rawData.map(x => ({
+    strain: x.strain,
+    sraAccession: x.sraAccession,
+    date: x.date ? globalDateCache.getDay(x.date) : null,
+    region: x.region,
+    country: x.country,
+    clade: x.clade,
+  }));
 }
 
 function _extractLapisData<T>(response: LapisResponse<T>): T {

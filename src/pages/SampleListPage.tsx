@@ -40,7 +40,7 @@ export const SampleListPage = () => {
     <>
       <PageHeaderWithReturn title='Selected samples' to={`../explore${searchString}`} />
 
-      <div style={{ height: 800, width: '100%' }}>
+      <div style={{ width: '100%' }}>
         <DataGrid
           rows={rows}
           columns={columns}

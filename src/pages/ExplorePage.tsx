@@ -10,6 +10,8 @@ import { MutationData } from '../data/MutationDataset';
 import { MutationList } from '../widgets/MutationList';
 import { TopButtons } from '../components/TopButtons';
 import { LapisNote } from '../components/LapisNote';
+import { DateRangeSelectChart } from "../components/DateRangeSelectChart";
+import { DateCountSampleData } from "../data/DateCountSampleDataset";
 
 export const ExplorePage = () => {
   const { selector, setSelector } = useExploreUrl();
@@ -21,6 +23,11 @@ export const ExplorePage = () => {
 
   const { data: nucMutationCounts } = useQuery(
     signal => MutationData.fromApi(selector, 'nuc', signal),
+    [selector]
+  );
+
+  const {data: dateCounts} = useQuery(
+    signal => DateCountSampleData.fromApi(selector, signal),
     [selector]
   );
 
@@ -79,6 +86,7 @@ export const ExplorePage = () => {
     <>
       <LapisNote />
       {topFilters}
+      {dateCounts && <DateRangeSelectChart dateCounts={dateCounts} />}
       {topButtons}
       {mainContent}
     </>

@@ -21,7 +21,7 @@ export function useExploreUrl(): ExploreUrl {
         country: searchParam.get('country') ?? undefined,
         division: searchParam.get('division') ?? undefined,
       },
-      host: searchParam.get('host')?.split(','),
+      host: searchParam.get('host')?.split(',') ?? [],
       variant: {
         clade: searchParam.get('clade') ?? undefined,
       },

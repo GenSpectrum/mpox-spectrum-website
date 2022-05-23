@@ -4,12 +4,16 @@ import { CladeSelect } from './CladeSelect';
 import { VariantSelector } from '../data/VariantSelector';
 import { DateRangeSelect } from './DateRangeSelect';
 import { DateRangeSelector } from '../data/DateRangeSelector';
+import { HostSelect } from './HostSelect';
+import { HostSelector } from '../data/HostSelector';
 
 type Props = {
   location: LocationSelector;
   setLocation: (location: LocationSelector) => void;
   variant: VariantSelector;
   setVariant: (variant: VariantSelector) => void;
+  host: HostSelector;
+  setHost: (host: HostSelector) => void;
   dateRange: DateRangeSelector;
   setDateRange: (dateRange: DateRangeSelector) => void;
 };
@@ -22,6 +26,8 @@ export const TopFilterArea = ({
   setLocation,
   variant,
   setVariant,
+  host,
+  setHost,
   dateRange,
   setDateRange,
 }: Props) => {
@@ -32,6 +38,9 @@ export const TopFilterArea = ({
       </div>
       <div className='w-72'>
         <CladeSelect selected={variant} onSelect={setVariant} />
+      </div>
+      <div className='w-72'>
+        <HostSelect selected={host} onSelect={setHost} />
       </div>
       <div className='w-72'>
         <DateRangeSelect selected={dateRange} onSelect={setDateRange} />

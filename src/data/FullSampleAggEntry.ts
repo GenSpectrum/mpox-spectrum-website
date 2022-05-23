@@ -19,6 +19,6 @@ export type FullSampleAggEntryRaw = Omit<FullSampleAggEntry, 'date'> & {
 export function parseFullSampleAggEntry(raw: FullSampleAggEntryRaw): FullSampleAggEntry {
   return {
     ...raw,
-    date: raw.date != null ? globalDateCache.getDay(raw.date) : null,
+    date: raw.date ? globalDateCache.getDay(raw.date) : null,
   };
 }

@@ -32,7 +32,7 @@ export const TopFilterArea = ({
   setDateRange,
 }: Props) => {
   return (
-    <div className='flex flex-row flex-wrap'>
+    <div className='flex flex-row flex-wrap justify-center'>
       <div className='w-72'>
         <LocationSelect selected={location} onSelect={newLocation => setLocation(newLocation)} />
       </div>

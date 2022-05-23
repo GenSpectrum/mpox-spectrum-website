@@ -46,6 +46,7 @@ export const SampleListPage = () => {
           columns={columns}
           density={'compact'}
           hideFooterPagination={true}
+          autoHeight={true}
           initialState={{
             sorting: {
               sortModel: [{ field: 'date', sort: 'desc' }],

@@ -10,9 +10,13 @@ import { MutationData } from '../data/MutationDataset';
 import { MutationList } from '../widgets/MutationList';
 import { TopButtons } from '../components/TopButtons';
 import { LapisNote } from '../components/LapisNote';
+import { TimeBarChart } from '../widgets/TimeBarChart';
+import { DateCountSampleData } from '../data/DateCountSampleDataset';
 
 export const ExplorePage = () => {
   const { selector, setSelector } = useExploreUrl();
+
+  const { data: dateCounts } = useQuery(signal => DateCountSampleData.fromApi(selector, signal), [selector]);
 
   const { data: countryCounts } = useQuery(
     signal => CountryCountSampleData.fromApi(selector, signal),
@@ -50,12 +54,16 @@ export const ExplorePage = () => {
   );
 
   const mainContent =
-    countryCounts && nucMutationCounts ? (
+    dateCounts && countryCounts && nucMutationCounts ? (
       <>
         <CoreMetrices countryCounts={countryCounts} />
         <PackedGrid maxColumns={2}>
           <GridCell minWidth={600}>
-            <NamedCard title='Sequences over time'>Under construction</NamedCard>
+            <NamedCard title='Sequences over time'>
+              <div style={{ height: 300 }}>
+                <TimeBarChart dateCounts={dateCounts} />
+              </div>
+            </NamedCard>
           </GridCell>
           {!selector.location?.country && (
             <GridCell minWidth={600}>

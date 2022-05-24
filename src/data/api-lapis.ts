@@ -11,7 +11,7 @@ import { DetailsSampleEntry } from './DetailsSampleEntry';
 import { globalDateCache } from '../helpers/date-cache';
 import { CladeCountSampleEntry } from './CladeCountSampleEntry';
 import { HostCountSampleEntry } from './HostCountSampleEntry';
-import { DateCountSampleEntry } from "./DateCountSampleEntry";
+import { DateCountSampleEntry } from './DateCountSampleEntry';
 
 const HOST = process.env.REACT_APP_LAPIS_HOST;
 
@@ -73,6 +73,14 @@ export function getLinkTo(
   } else {
     return `${HOST}/sample/${endpoint}?${params.toString()}`;
   }
+}
+
+export function getLinkToFasta(
+  aligned: boolean,
+  selector: LapisSelector,
+  orderAndLimit?: OrderAndLimitConfig
+): string {
+  return getLinkTo(aligned ? 'fasta-aligned' : 'fasta', selector, orderAndLimit, true);
 }
 
 export async function fetchAggSamples(

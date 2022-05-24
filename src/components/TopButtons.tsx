@@ -3,6 +3,7 @@ import { ExternalLink } from './ExternalLink';
 import { getLinkTo } from '../data/api-lapis';
 import { LapisSelector } from '../data/LapisSelector';
 import { Link, useLocation } from 'react-router-dom';
+import { NextcladeIntegration } from '../services/external-integrations/NextcladeIntegration';
 
 type Props = {
   selector: LapisSelector;
@@ -22,6 +23,9 @@ export const TopButtons = ({ selector }: Props) => {
     </ExternalLink>,
     <ExternalLink url={getLinkTo('details', selector, undefined, true, 'csv')}>
       <Button variant={ButtonVariant.SECONDARY}>Download metadata</Button>
+    </ExternalLink>,
+    <ExternalLink url={NextcladeIntegration.getLink(selector)}>
+      <Button variant={ButtonVariant.SECONDARY}>Open in Nextclade</Button>
     </ExternalLink>,
   ];
 

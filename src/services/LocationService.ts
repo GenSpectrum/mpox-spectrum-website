@@ -51,7 +51,7 @@ const isoAlpha2Countries: { [id: string]: string } = {
   // 'Congo': 'CG',
   // 'Cook Islands': 'CK',
   // 'Costa Rica': 'CR',
-  'Cote d\'Ivoire': 'CI',
+  "Cote d'Ivoire": 'CI',
   // 'Croatia': 'HR',
   // 'Cuba': 'CU',
   // 'Cyprus': 'CY',

@@ -163,6 +163,8 @@ export async function fetchDetailsSamples(
     strain: x.strain,
     sraAccession: x.sraAccession,
     date: x.date ? globalDateCache.getDay(x.date) : null,
+    year: x.year,
+    month: x.month,
     region: x.region,
     country: x.country,
     clade: x.clade,

@@ -220,3 +220,15 @@ class DateCache {
 export const globalDateCache = new DateCache();
 
 export const DateCacheClassForTests = DateCache;
+
+export function potentiallyPartialDateToString({
+  date,
+  year,
+  month,
+}: {
+  date: UnifiedDay | null;
+  year: number | null;
+  month: number | null;
+}): string | null {
+  return date?.string ?? (year ? year + (month ? '-' + String(month).padStart(2, '0') : '') : null);
+}

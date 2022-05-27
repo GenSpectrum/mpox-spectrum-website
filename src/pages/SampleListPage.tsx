@@ -5,6 +5,7 @@ import { useExploreUrl } from '../helpers/explore-url';
 import { DetailsSampleData } from '../data/DetailsSampleDataset';
 import { useMemo } from 'react';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
+import { potentiallyPartialDateToString } from '../helpers/date-cache';
 
 export const SampleListPage = () => {
   const searchString = useLocation().search;
@@ -27,7 +28,7 @@ export const SampleListPage = () => {
     }
     return data.payload.map((d, index) => ({
       ...d,
-      date: d.date?.string,
+      date: potentiallyPartialDateToString(d),
       id: index,
     }));
   }, [data]);

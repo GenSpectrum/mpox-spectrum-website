@@ -203,7 +203,7 @@ const isoAlpha2Countries: { [id: string]: string } = {
   // 'Somalia': 'SO',
   // 'South Africa': 'ZA',
   // 'South Georgia And Sandwich Isl.': 'GS',
-  // 'Spain': 'ES',
+  'Spain': 'ES',
   // 'Sri Lanka': 'LK',
   'Sudan': 'SD',
   // 'Suriname': 'SR',

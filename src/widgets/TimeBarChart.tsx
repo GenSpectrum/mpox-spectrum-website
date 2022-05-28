@@ -1,4 +1,8 @@
-import { DateCountSampleData, DateCountSampleDataset } from '../data/DateCountSampleDataset';
+import {
+  DateCountSampleData,
+  DateCountSampleDataset,
+  YearCountSampleDataset,
+} from '../data/DateCountSampleDataset';
 import { globalDateCache } from '../helpers/date-cache';
 import { useMemo } from 'react';
 import { ResponsiveContainer, BarChart, XAxis, YAxis, Tooltip, Bar } from 'recharts';
@@ -6,9 +10,10 @@ import dayjs from 'dayjs';
 
 type Props = {
   dateCounts: DateCountSampleDataset;
+  yearCounts: YearCountSampleDataset;
 };
 
-export const TimeBarChart = ({ dateCounts }: Props) => {
+export const TimeBarChart = ({ dateCounts, yearCounts }: Props) => {
   const { notEnoughData, yearly, weekly, weeklyTicks } = useMemo(() => {
     const dates = dateCounts.payload.filter(e => e.date).map(e => e.date!);
     const range = globalDateCache.rangeFromDays(dates);
@@ -31,13 +36,10 @@ export const TimeBarChart = ({ dateCounts }: Props) => {
     } else {
       return {
         notEnoughData: false,
-        yearly: DateCountSampleData.toYearCountSampleEntries(dateCounts.payload).filter(x => x.year) as {
-          year: number;
-          count: number;
-        }[],
+        yearly: yearCounts.payload,
       };
     }
-  }, [dateCounts]);
+  }, [dateCounts, yearCounts]);
 
   if (notEnoughData) {
     return <>There is not enough data to draw a plot.</>;

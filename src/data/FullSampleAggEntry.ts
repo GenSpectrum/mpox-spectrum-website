@@ -2,6 +2,8 @@ import { globalDateCache, UnifiedDay } from '../helpers/date-cache';
 
 export type FullSampleAggEntry = {
   date: UnifiedDay | null;
+  year: number | null;
+  month: number | null;
   region: string | null;
   country: string | null;
   division: string | null;

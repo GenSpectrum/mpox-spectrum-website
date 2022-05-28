@@ -18,6 +18,11 @@ export const ExplorePage = () => {
 
   const { data: dateCounts } = useQuery(signal => DateCountSampleData.fromApi(selector, signal), [selector]);
 
+  const { data: yearCounts } = useQuery(
+    signal => DateCountSampleData.yearCountFromApi(selector, signal),
+    [selector]
+  );
+
   const { data: countryCounts } = useQuery(
     signal => CountryCountSampleData.fromApi(selector, signal),
     [selector]
@@ -54,14 +59,14 @@ export const ExplorePage = () => {
   );
 
   const mainContent =
-    dateCounts && countryCounts && nucMutationCounts ? (
+    dateCounts && yearCounts && countryCounts && nucMutationCounts ? (
       <>
         <CoreMetrices countryCounts={countryCounts} />
         <PackedGrid maxColumns={2}>
           <GridCell minWidth={600}>
             <NamedCard title='Sequences over time'>
               <div style={{ height: 300 }}>
-                <TimeBarChart dateCounts={dateCounts} />
+                <TimeBarChart dateCounts={dateCounts} yearCounts={yearCounts} />
               </div>
             </NamedCard>
           </GridCell>

@@ -11,7 +11,7 @@ import { DetailsSampleEntry } from './DetailsSampleEntry';
 import { globalDateCache } from '../helpers/date-cache';
 import { CladeCountSampleEntry } from './CladeCountSampleEntry';
 import { HostCountSampleEntry } from './HostCountSampleEntry';
-import { DateCountSampleEntry } from './DateCountSampleEntry';
+import { DateCountSampleEntry, YearCountSampleEntry } from './DateCountSampleEntry';
 
 const HOST = process.env.REACT_APP_LAPIS_HOST;
 
@@ -104,6 +104,13 @@ export async function fetchDateCountSamples(
   signal?: AbortSignal
 ): Promise<DateCountSampleEntry[]> {
   return fetchAggSamples(selector, ['date'], signal);
+}
+
+export async function fetchYearCountSamples(
+  selector: LapisSelector,
+  signal?: AbortSignal
+): Promise<YearCountSampleEntry[]> {
+  return fetchAggSamples(selector, ['year'], signal);
 }
 
 export async function fetchCountryCountSamples(

@@ -11,12 +11,17 @@ type Props = {
   hideProportions?: boolean;
 };
 
-export const MutationList = ({ mutations, hideProportions = false }: Props) => {
+export const MutationList = ({ mutations, hideProportions = false, sequenceType }: Props) => {
   const { width, ref } = useResizeDetector<HTMLDivElement>();
   const displayedMutations = useMemo(() => {
-    const filtered = mutations.payload.filter(m => !m.mutation.endsWith('-') && m.proportion > 0.05);
+    const filtered = mutations.payload.filter(
+      m =>
+        !(sequenceType === 'nuc' && m.mutation.startsWith('N')) &&
+        !m.mutation.endsWith('-') &&
+        m.proportion > 0.05
+    );
     return sortListByNucMutation(filtered, x => x.mutation);
-  }, [mutations]);
+  }, [mutations, sequenceType]);
   const [show, setShow] = useState(displayedMutations.length < 100);
   return (
     <div ref={ref}>

@@ -2,8 +2,10 @@ import { addLocationSelectorToUrlSearchParams, LocationSelector } from './Locati
 import { addDateRangeSelectorToUrlSearchParams, DateRangeSelector } from './DateRangeSelector';
 import { addHostSelectorToUrlSearchParams, HostSelector } from './HostSelector';
 import { addVariantSelectorToUrlSearchParams, VariantSelector } from './VariantSelector';
+import { addIdentifierSelectorToUrlSearchParam, IdentifierSelector } from './IdentifierSelector';
 
 export type LapisSelector = {
+  identifier?: IdentifierSelector;
   location?: LocationSelector;
   dateRange?: DateRangeSelector;
   variant?: VariantSelector;
@@ -11,6 +13,9 @@ export type LapisSelector = {
 };
 
 export function addLapisSelectorToUrlSearchParams(selector: LapisSelector, params: URLSearchParams) {
+  if (selector.identifier) {
+    addIdentifierSelectorToUrlSearchParam(selector.identifier, params);
+  }
   if (selector.location) {
     addLocationSelectorToUrlSearchParams(selector.location, params);
   }

@@ -1,10 +1,10 @@
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { PageHeaderWithReturn } from '../components/PageHeaderWithReturn';
 import { useQuery } from '../helpers/query-hook';
 import { useExploreUrl } from '../helpers/explore-url';
 import { DetailsSampleData } from '../data/DetailsSampleDataset';
 import { useMemo } from 'react';
-import { DataGrid, GridColDef } from '@mui/x-data-grid';
+import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
 import { potentiallyPartialDateToString } from '../helpers/date-cache';
 
 export const SampleListPage = () => {
@@ -13,7 +13,21 @@ export const SampleListPage = () => {
   const { data } = useQuery(signal => DetailsSampleData.fromApi(selector, signal), [selector]);
 
   const columns: GridColDef[] = [
-    { field: 'strain', headerName: 'Strain', minWidth: 400 },
+    {
+      field: 'strain',
+      headerName: 'Strain',
+      minWidth: 250,
+      renderCell: (params: GridRenderCellParams<string>) =>
+        params.value ? (
+          <Link to={`${encodeURIComponent(params.value)}`}>
+            <button className='underline'>
+              <span className='w-60 text-ellipsis overflow-hidden block text-left'>{params.value}</span>
+            </button>
+          </Link>
+        ) : (
+          <></>
+        ),
+    },
     { field: 'sraAccession', headerName: 'SRA accession', minWidth: 150 },
     { field: 'date', headerName: 'Date', minWidth: 150 },
     { field: 'region', headerName: 'Region', minWidth: 200 },
@@ -46,13 +60,13 @@ export const SampleListPage = () => {
           rows={rows}
           columns={columns}
           density={'compact'}
-          hideFooterPagination={true}
           autoHeight={true}
           initialState={{
             sorting: {
               sortModel: [{ field: 'date', sort: 'desc' }],
             },
           }}
+          rowsPerPageOptions={[100, 200, 500, 1000]}
         />
       </div>
     </>

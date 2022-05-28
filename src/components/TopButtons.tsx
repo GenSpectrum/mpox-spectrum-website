@@ -7,14 +7,12 @@ import { NextcladeIntegration } from '../services/external-integrations/Nextclad
 
 type Props = {
   selector: LapisSelector;
+  hideSequenceTableButton?: boolean;
 };
 
-export const TopButtons = ({ selector }: Props) => {
+export const TopButtons = ({ selector, hideSequenceTableButton = false }: Props) => {
   const searchString = useLocation().search;
   const buttons = [
-    <Link to={`../samples${searchString}`}>
-      <Button variant={ButtonVariant.PRIMARY}>See sequence table</Button>
-    </Link>,
     <ExternalLink url={getLinkTo('fasta-aligned', selector, undefined, true)}>
       <Button variant={ButtonVariant.SECONDARY}>Download FASTA (aligned)</Button>
     </ExternalLink>,
@@ -28,6 +26,13 @@ export const TopButtons = ({ selector }: Props) => {
       <Button variant={ButtonVariant.SECONDARY}>Open in Nextclade</Button>
     </ExternalLink>,
   ];
+  if (!hideSequenceTableButton) {
+    buttons.unshift(
+      <Link to={`../samples${searchString}`}>
+        <Button variant={ButtonVariant.PRIMARY}>See sequence table</Button>
+      </Link>
+    );
+  }
 
   return (
     <div className='flex flex-row flex-wrap'>

@@ -23,7 +23,7 @@ export const HostSelect = ({ selected, onSelect }: Props) => {
       id='grouped-demo'
       options={allOptions}
       onChange={(event: any, newValue: any) => {
-        if (newValue === 'All hosts') {
+        if (newValue === null || newValue === 'All hosts') {
           onSelect([]);
         } else {
           onSelect([newValue]);

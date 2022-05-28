@@ -23,7 +23,7 @@ export const CladeSelect = ({ selected, onSelect }: Props) => {
       id='grouped-demo'
       options={allOptions}
       onChange={(event: any, newValue: any) => {
-        if (newValue === 'All clades') {
+        if (newValue === null || newValue === 'All clades') {
           onSelect({});
         } else {
           onSelect({ clade: newValue });

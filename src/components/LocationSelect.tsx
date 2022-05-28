@@ -39,7 +39,9 @@ export const LocationSelect = ({ selected, onSelect }: Props) => {
         groupBy={option => option.group}
         getOptionLabel={option => option.place}
         onChange={(event: any, newValue: any) => {
-          if (newValue !== null && newValue.place) {
+          if (newValue === null) {
+            onSelect({});
+          } else if (newValue.place) {
             onSelect(decodeLocationSelectorFromSingleString(newValue.place));
           }
         }}

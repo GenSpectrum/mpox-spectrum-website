@@ -27,7 +27,7 @@ export const DateRangeSelect = ({ selected, onSelect }: Props) => {
       id='grouped-demo'
       options={options}
       onChange={(event: any, newValue: any) => {
-        if (newValue === 'All times') {
+        if (newValue === null || newValue === 'All times') {
           onSelect({});
         } else if (newValue === '2022') {
           onSelect({ yearFrom: 2022 });

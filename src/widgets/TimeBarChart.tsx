@@ -76,7 +76,7 @@ export const TimeBarChart = ({ dateCounts, yearCounts }: Props) => {
               tickFormatter={formatXAxis}
             />
             <YAxis />
-            <Tooltip />
+            <Tooltip labelFormatter={(value: unknown) => 'Week ' + value} />
             <Bar dataKey='count' fill='#8884d8' />
           </BarChart>
         </ResponsiveContainer>

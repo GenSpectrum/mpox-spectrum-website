@@ -1,6 +1,5 @@
 import { Autocomplete, TextField } from '@mui/material';
 import { DateRangeSelector } from '../data/DateRangeSelector';
-import { globalDateCache } from '../helpers/date-cache';
 
 export interface Props {
   selected: DateRangeSelector;
@@ -10,9 +9,9 @@ export interface Props {
 export const DateRangeSelect = ({ selected, onSelect }: Props) => {
   const options = ['All times', '2022'];
   let selectedOption;
-  if (!selected.dateFrom && !selected.dateTo) {
+  if (!selected.dateFrom && !selected.dateTo && !selected.yearFrom) {
     selectedOption = 'All times';
-  } else if (selected.dateFrom === globalDateCache.getDay('2022-01-01') && !selected.dateTo) {
+  } else if (selected.yearFrom === 2022) {
     selectedOption = '2022';
   } else {
     selectedOption = 'Custom';
@@ -31,7 +30,7 @@ export const DateRangeSelect = ({ selected, onSelect }: Props) => {
         if (newValue === 'All times') {
           onSelect({});
         } else if (newValue === '2022') {
-          onSelect({ dateFrom: globalDateCache.getDay('2022-01-01') });
+          onSelect({ yearFrom: 2022 });
         }
       }}
       renderInput={params => (

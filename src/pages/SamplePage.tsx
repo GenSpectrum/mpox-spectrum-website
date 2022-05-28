@@ -7,6 +7,7 @@ import { potentiallyPartialDateToString } from '../helpers/date-cache';
 import { MutationList } from '../widgets/MutationList';
 import { MutationData } from '../data/MutationDataset';
 import { NamedCard } from '../components/NamedCard';
+import { ExternalLink } from '../components/ExternalLink';
 
 export const SamplePage = () => {
   let { sampleName } = useParams();
@@ -32,20 +33,24 @@ export const SamplePage = () => {
   }
 
   const location = [entry.region, entry.country].filter(x => x).join('/');
-  const information = [
-    entry.sraAccession,
-    potentiallyPartialDateToString(entry),
-    location,
-    entry.host,
-    entry.clade,
-  ]
+  const information = [potentiallyPartialDateToString(entry), location, entry.host, entry.clade]
     .filter(x => x?.length)
     .join(' - ');
 
   return (
     <div className='mx-2 md:mx-8 my-2'>
       <h1>{sampleName}</h1>
-      <div>{information}</div>
+      <div>
+        {entry.sraAccession !== 'XXXXXXXX' && (
+          <>
+            <ExternalLink url={'https://www.ncbi.nlm.nih.gov/nuccore/' + entry.sraAccession}>
+              <span className='underline'>{entry.sraAccession}</span>
+            </ExternalLink>{' '}
+            -{' '}
+          </>
+        )}
+        {information}
+      </div>
       <div className='mt-4'>
         <TopButtons selector={selector} hideSequenceTableButton={true} />
       </div>

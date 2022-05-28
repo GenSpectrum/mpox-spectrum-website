@@ -2,6 +2,8 @@ import { MutationDataset, SequenceType } from '../data/MutationDataset';
 import styled from 'styled-components';
 import { useResizeDetector } from 'react-resize-detector';
 import { useMemo, useState } from 'react';
+import { sortListByNucMutation } from '../helpers/nuc-mutation';
+import { ExternalLink } from '../components/ExternalLink';
 
 type Props = {
   mutations: MutationDataset;
@@ -9,32 +11,35 @@ type Props = {
 };
 
 export const MutationList = ({ mutations }: Props) => {
-  const { width } = useResizeDetector<HTMLDivElement>();
-  const filteredMutations = useMemo(() => mutations.payload.filter(m => m.proportion > 0.05), [mutations]);
-  const [show, setShow] = useState(filteredMutations.length < 100);
-
+  const { width, ref } = useResizeDetector<HTMLDivElement>();
+  const displayedMutations = useMemo(() => {
+    const filtered = mutations.payload.filter(m => !m.mutation.endsWith('-') && m.proportion > 0.05);
+    return sortListByNucMutation(filtered, x => x.mutation);
+  }, [mutations]);
+  const [show, setShow] = useState(displayedMutations.length < 100);
   return (
-    <>
+    <div ref={ref}>
       <div>
-        <b>Note:</b> The mutations are based on an initial alignment using "MPXV-UK_P2 MT903344.1" as the
-        reference. There will likely be changes.
+        <b>Note:</b> The mutations are based on an alignment using{' '}
+        <ExternalLink url='https://nextclade.vercel.app'>Nextclade</ExternalLink> with "MPXV-UK_P2 MT903344.1"
+        as the reference. The reference genome might change in the future.
       </div>
-      There are {filteredMutations.length} mutations with a proportion of at least 5%.{' '}
+      There are {displayedMutations.length} mutations with a proportion of at least 5%.{' '}
       {!show && (
         <button className='underline' onClick={() => setShow(true)}>
           Show the mutations.
         </button>
       )}
       {show && (
-        <List width={width ?? 500}>
-          {filteredMutations.map(({ mutation, proportion }) => (
+        <List width={width ?? 1}>
+          {displayedMutations.map(({ mutation, proportion }) => (
             <MutationEntry key={mutation}>
               {mutation} ({(proportion * 100).toFixed(2)}%)
             </MutationEntry>
           ))}
         </List>
       )}
-    </>
+    </div>
   );
 };
 

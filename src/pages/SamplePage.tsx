@@ -54,7 +54,7 @@ export const SamplePage = () => {
       <div className='mt-4'>
         <TopButtons selector={selector} hideSequenceTableButton={true} />
       </div>
-      <NamedCard title='Mutations'>
+      <NamedCard title='Nucleotide differences'>
         <MutationList mutations={nucMutationCounts} sequenceType={'nuc'} hideProportions={true} />
       </NamedCard>
     </div>

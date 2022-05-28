@@ -78,7 +78,7 @@ export const ExplorePage = () => {
             </GridCell>
           )}
           <GridCell minWidth={600}>
-            <NamedCard title='Mutations'>
+            <NamedCard title='Nucleotide differences'>
               <MutationList mutations={nucMutationCounts} sequenceType={'nuc'} />
             </NamedCard>
           </GridCell>

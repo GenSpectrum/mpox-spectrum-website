@@ -4,6 +4,7 @@ import { getLinkTo } from '../data/api-lapis';
 import { LapisSelector } from '../data/LapisSelector';
 import { Link, useLocation } from 'react-router-dom';
 import { NextcladeIntegration } from '../services/external-integrations/NextcladeIntegration';
+import { TaxoniumIntegration } from '../services/external-integrations/TaxoniumIntegration';
 
 type Props = {
   selector: LapisSelector;
@@ -24,6 +25,9 @@ export const TopButtons = ({ selector, hideSequenceTableButton = false }: Props)
     </ExternalLink>,
     <ExternalLink url={NextcladeIntegration.getLink(selector)}>
       <Button variant={ButtonVariant.SECONDARY}>Open in Nextclade</Button>
+    </ExternalLink>,
+    <ExternalLink url={TaxoniumIntegration.getLink(selector)}>
+      <Button variant={ButtonVariant.SECONDARY}>Open in Taxonium</Button>
     </ExternalLink>,
   ];
   if (!hideSequenceTableButton) {

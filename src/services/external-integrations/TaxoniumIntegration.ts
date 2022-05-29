@@ -2,13 +2,13 @@ import { LapisSelector } from '../../data/LapisSelector';
 
 export class TaxoniumIntegration {
   static getLink({ identifier, variant, location, host, dateRange }: LapisSelector): string {
-    const baseUrl = 'https://taxonium.org/';
+    const baseUrl = 'https://mpx.taxonium.org/';
     const params = new URLSearchParams();
 
     params.set(
       'color',
       JSON.stringify({
-        field: 'none',
+        field: 'None',
       })
     );
     // The variant
@@ -52,9 +52,6 @@ export class TaxoniumIntegration {
       ])
     );
     params.set('enabled', '{"aa1":true,"search_root":true}');
-    params.set('protoUrl', 'https://mpx-tree.vercel.app/mpx.jsonl.gz');
-    params.set('configUrl', 'https://mpx-tree.vercel.app/config.json');
-    params.set('taxonColumn', 'strain');
     return `${baseUrl}?${params.toString()}`;
   }
 }
@@ -69,6 +66,5 @@ function createField(type: string, text: string, exact = true) {
     position: 484,
     new_residue: 'any',
     min_tips: 0,
-    controls: true,
   };
 }

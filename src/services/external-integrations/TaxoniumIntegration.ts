@@ -1,7 +1,7 @@
 import { LapisSelector } from '../../data/LapisSelector';
 
 export class TaxoniumIntegration {
-  static getLink({ identifier, variant, location, host }: LapisSelector): string {
+  static getLink({ identifier, variant, location, host, dateRange }: LapisSelector): string {
     const baseUrl = 'https://taxonium.org/';
     const params = new URLSearchParams();
 
@@ -31,6 +31,9 @@ export class TaxoniumIntegration {
     if (host && host[0]) {
       searchList.push(createField('meta_host', host[0]));
     }
+    if (dateRange?.yearFrom) {
+      searchList.push(createField('meta_date', dateRange.yearFrom.toString(), false));
+    }
     params.set(
       'srch',
       JSON.stringify([
@@ -56,11 +59,11 @@ export class TaxoniumIntegration {
   }
 }
 
-function createField(type: string, text: string) {
+function createField(type: string, text: string, exact = true) {
   return {
     key: 'search' + Math.random(),
     type,
-    method: 'text_exact',
+    method: exact ? 'text_exact' : 'text_match',
     text,
     gene: 'S',
     position: 484,

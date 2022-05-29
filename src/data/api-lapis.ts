@@ -12,6 +12,7 @@ import { globalDateCache } from '../helpers/date-cache';
 import { CladeCountSampleEntry } from './CladeCountSampleEntry';
 import { HostCountSampleEntry } from './HostCountSampleEntry';
 import { DateCountSampleEntry, YearCountSampleEntry } from './DateCountSampleEntry';
+import { ContributorsSampleEntry } from './ContributorsSampleEntry';
 
 const HOST = process.env.REACT_APP_LAPIS_HOST;
 
@@ -177,6 +178,19 @@ export async function fetchDetailsSamples(
     clade: x.clade,
     host: x.host,
   }));
+}
+
+export async function fetchContributorsSamples(
+  selector: LapisSelector,
+  signal?: AbortSignal
+): Promise<ContributorsSampleEntry[]> {
+  const link = await getLinkTo(`contributors`, selector, undefined, undefined, undefined, true);
+  const res = await get(link, signal);
+  if (!res.ok) {
+    throw new Error('Error fetching new data!!');
+  }
+  const body = (await res.json()) as LapisResponse<any[]>;
+  return _extractLapisData(body);
 }
 
 function _extractLapisData<T>(response: LapisResponse<T>): T {

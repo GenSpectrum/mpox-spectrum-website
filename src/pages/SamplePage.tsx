@@ -8,6 +8,7 @@ import { MutationList } from '../widgets/MutationList';
 import { MutationData } from '../data/MutationDataset';
 import { NamedCard } from '../components/NamedCard';
 import { ExternalLink } from '../components/ExternalLink';
+import { ContributorsSampleData } from '../data/ContributorsSampleDataset';
 
 export const SamplePage = () => {
   let { sampleName } = useParams();
@@ -21,8 +22,12 @@ export const SamplePage = () => {
     signal => MutationData.fromApi(selector, 'nuc', signal),
     [selector]
   );
+  const { data: contributors } = useQuery(
+    signal => ContributorsSampleData.fromApi(selector, signal),
+    [selector]
+  );
 
-  if (!data || !nucMutationCounts) {
+  if (!data || !nucMutationCounts || !contributors) {
     return <>Loading...</>;
   }
 
@@ -50,6 +55,9 @@ export const SamplePage = () => {
           </>
         )}
         {information}
+      </div>
+      <div>
+        <strong>Authors:</strong> {contributors.payload[0].authors ?? 'unknown'}
       </div>
       <div className='mt-4'>
         <TopButtons selector={selector} hideSequenceTableButton={true} />

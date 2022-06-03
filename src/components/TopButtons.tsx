@@ -33,7 +33,7 @@ export const TopButtons = ({ selector, hideSequenceTableButton = false }: Props)
   if (!hideSequenceTableButton) {
     buttons.unshift(
       <Link to={`../samples${searchString}`}>
-        <Button variant={ButtonVariant.PRIMARY}>See sequence table</Button>
+        <Button variant={ButtonVariant.PRIMARY}>Browse sequences</Button>
       </Link>
     );
   }

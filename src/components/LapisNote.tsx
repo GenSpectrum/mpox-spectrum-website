@@ -6,7 +6,7 @@ export const LapisNote = () => {
     <>
       <Alert variant={AlertVariant.WARNING}>
         The data presented on this dashboard are also available through a public web API: visit the{' '}
-        <ExternalLink url='https://mpox-lapis.gen-spectrum.org'>
+        <ExternalLink url='https://mpox-lapis.genspectrum.org'>
           <span className='underline'>Mpox-LAPIS documentation</span>
         </ExternalLink>{' '}
         for details.

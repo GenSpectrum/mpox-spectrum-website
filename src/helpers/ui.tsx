@@ -62,10 +62,11 @@ interface ButtonProps {
   children?: React.ReactNode;
   onClick?: () => any;
   className?: string;
+  disabled?: boolean;
 }
 
 export const RawButton = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ variant = ButtonVariant.PRIMARY, children, onClick, className }, ref) => {
+  ({ variant = ButtonVariant.PRIMARY, children, onClick, className, disabled }, ref) => {
     return (
       <button
         ref={ref}
@@ -73,6 +74,7 @@ export const RawButton = React.forwardRef<HTMLButtonElement, ButtonProps>(
           variant
         )} px-2 text-white w-full transition ease-in duration-100 scale-110 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg `}
         onClick={onClick}
+        disabled={disabled}
       >
         {children}
       </button>

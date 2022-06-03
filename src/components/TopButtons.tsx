@@ -5,6 +5,9 @@ import { LapisSelector } from '../data/LapisSelector';
 import { Link, useLocation } from 'react-router-dom';
 import { NextcladeIntegration } from '../services/external-integrations/NextcladeIntegration';
 import { TaxoniumIntegration } from '../services/external-integrations/TaxoniumIntegration';
+import { downloadAcknowledgementTable } from '../helpers/acknowledgement-pdf';
+import { useQuery } from '../helpers/query-hook';
+import { ContributorsSampleData } from '../data/ContributorsSampleDataset';
 
 type Props = {
   selector: LapisSelector;
@@ -13,6 +16,11 @@ type Props = {
 
 export const TopButtons = ({ selector, hideSequenceTableButton = false }: Props) => {
   const searchString = useLocation().search;
+  const { data: contributors } = useQuery(
+    signal => ContributorsSampleData.fromApi(selector, signal),
+    [selector]
+  );
+
   const buttons = [
     <ExternalLink url={getLinkTo('fasta-aligned', selector, undefined, true)}>
       <Button variant={ButtonVariant.SECONDARY}>Download FASTA (aligned)</Button>
@@ -23,6 +31,13 @@ export const TopButtons = ({ selector, hideSequenceTableButton = false }: Props)
     <ExternalLink url={getLinkTo('details', selector, undefined, true, 'csv')}>
       <Button variant={ButtonVariant.SECONDARY}>Download metadata</Button>
     </ExternalLink>,
+    <Button
+      disabled={!contributors}
+      onClick={() => contributors && downloadAcknowledgementTable(contributors)}
+      variant={ButtonVariant.SECONDARY}
+    >
+      Download acknowledgement table
+    </Button>,
     <ExternalLink url={NextcladeIntegration.getLink(selector)}>
       <Button variant={ButtonVariant.SECONDARY}>Open in Nextclade</Button>
     </ExternalLink>,

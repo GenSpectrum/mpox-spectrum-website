@@ -10,9 +10,9 @@ export const AboutPage = () => {
           Computational Evolution group of ETH Zürich
         </ExternalLink>{' '}
         in Switzerland (Chaoran Chen and Tanja Stadler). The monkeypox data is pre-processed and aligned by
-        members of the <ExternalLink url='(https://nextstrain.org/'>NextStrain team</ExternalLink> (Emma
-        Hodcroft, Cornelius Roemer, Richard Neher). We acknowledge the teams around the world sharing data
-        openly on genbank in real time during this outbreak. We express our sincere gratitude.
+        members of the <ExternalLink url='(https://nextstrain.org/'>NextStrain team</ExternalLink>. We
+        acknowledge the teams around the world sharing data openly on GenBank in real time during this
+        outbreak. We express our sincere gratitude.
       </p>
     </div>
   );

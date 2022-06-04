@@ -13,7 +13,9 @@ export function downloadAcknowledgementTable(contributors: ContributorsSampleDat
   const list = [];
   for (let [key, entries] of groups) {
     const [authors, submittingLab, originatingLab] = key.split('@@@').map(x => (x === 'null' ? null : x));
-    const sequences = entries.map(e => e.strain);
+    const sequences = entries.map(e =>
+      e.sraAccession && e.sraAccession !== 'XXXXXXXX' ? e.sraAccession : e.strain
+    );
     list.push({ text: authors ?? 'Unknown authors', style: 'authors' });
     if (submittingLab) {
       list.push({ text: 'Submitting lab: ' + submittingLab, style: 'labs' });

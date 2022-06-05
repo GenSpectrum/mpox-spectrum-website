@@ -1,4 +1,3 @@
-import { Button, ButtonVariant } from '../helpers/ui';
 import { ExternalLink } from './ExternalLink';
 import { getLinkTo } from '../data/api-lapis';
 import { LapisSelector } from '../data/LapisSelector';
@@ -8,6 +7,7 @@ import { TaxoniumIntegration } from '../services/external-integrations/TaxoniumI
 import { downloadAcknowledgementTable } from '../helpers/acknowledgement-pdf';
 import { useQuery } from '../helpers/query-hook';
 import { ContributorsSampleData } from '../data/ContributorsSampleDataset';
+import { Button as MuiButton } from '@mui/material';
 
 type Props = {
   selector: LapisSelector;
@@ -23,32 +23,46 @@ export const TopButtons = ({ selector, hideSequenceTableButton = false }: Props)
 
   const buttons = [
     <ExternalLink url={getLinkTo('fasta-aligned', selector, undefined, true)}>
-      <Button variant={ButtonVariant.SECONDARY}>Download FASTA (aligned)</Button>
+      <MuiButton variant='contained' color='secondary' size='small'>
+        Download FASTA (aligned)
+      </MuiButton>
     </ExternalLink>,
     <ExternalLink url={getLinkTo('fasta', selector, undefined, true)}>
-      <Button variant={ButtonVariant.SECONDARY}>Download FASTA (unaligned)</Button>
+      <MuiButton variant='contained' color='secondary' size='small'>
+        Download FASTA (unaligned)
+      </MuiButton>
     </ExternalLink>,
     <ExternalLink url={getLinkTo('details', selector, undefined, true, 'csv')}>
-      <Button variant={ButtonVariant.SECONDARY}>Download metadata</Button>
+      <MuiButton variant='contained' color='secondary' size='small'>
+        Download metadata
+      </MuiButton>
     </ExternalLink>,
-    <Button
+    <MuiButton
+      variant='contained'
+      color='secondary'
+      size='small'
       disabled={!contributors}
       onClick={() => contributors && downloadAcknowledgementTable(contributors)}
-      variant={ButtonVariant.SECONDARY}
     >
       Download acknowledgement table
-    </Button>,
+    </MuiButton>,
     <ExternalLink url={NextcladeIntegration.getLink(selector)}>
-      <Button variant={ButtonVariant.SECONDARY}>Open in Nextclade</Button>
+      <MuiButton variant='contained' color='secondary' size='small'>
+        Open in Nextclade
+      </MuiButton>
     </ExternalLink>,
     <ExternalLink url={TaxoniumIntegration.getLink(selector)}>
-      <Button variant={ButtonVariant.SECONDARY}>Open in Taxonium</Button>
+      <MuiButton variant='contained' color='secondary' size='small'>
+        Open in Taxonium
+      </MuiButton>
     </ExternalLink>,
   ];
   if (!hideSequenceTableButton) {
     buttons.unshift(
       <Link to={`../samples${searchString}`}>
-        <Button variant={ButtonVariant.PRIMARY}>Browse sequences</Button>
+        <MuiButton variant='contained' color='primary' size='small'>
+          Browse sequences
+        </MuiButton>
       </Link>
     );
   }

@@ -7,7 +7,7 @@ import { TaxoniumIntegration } from '../services/external-integrations/TaxoniumI
 import { downloadAcknowledgementTable } from '../helpers/acknowledgement-pdf';
 import { useQuery } from '../helpers/query-hook';
 import { ContributorsSampleData } from '../data/ContributorsSampleDataset';
-import { Button as MuiButton, MenuItem } from '@mui/material';
+import { Button, MenuItem } from '@mui/material';
 import React from 'react';
 import { SplitButton } from './SplitButton';
 
@@ -25,23 +25,23 @@ export const TopButtons = ({ selector, hideSequenceTableButton = false }: Props)
 
   const buttons = [
     <ExternalLink url={getLinkTo('fasta-aligned', selector, undefined, true)}>
-      <MuiButton variant='contained' color='secondary' size='small'>
+      <Button variant='contained' color='secondary' size='small'>
         Download FASTA (aligned)
-      </MuiButton>
+      </Button>
     </ExternalLink>,
     <ExternalLink url={getLinkTo('fasta', selector, undefined, true)}>
-      <MuiButton variant='contained' color='secondary' size='small'>
+      <Button variant='contained' color='secondary' size='small'>
         Download FASTA (unaligned)
-      </MuiButton>
+      </Button>
     </ExternalLink>,
     <ExternalLink url={getLinkTo('details', selector, undefined, true, 'csv')}>
-      <MuiButton variant='contained' color='secondary' size='small'>
+      <Button variant='contained' color='secondary' size='small'>
         Download metadata
-      </MuiButton>
+      </Button>
     </ExternalLink>,
     <SplitButton
       mainButton={
-        <MuiButton
+        <Button
           variant='contained'
           color='secondary'
           size='small'
@@ -49,7 +49,7 @@ export const TopButtons = ({ selector, hideSequenceTableButton = false }: Props)
           onClick={() => contributors && downloadAcknowledgementTable(contributors)}
         >
           Download acknowledgement table
-        </MuiButton>
+        </Button>
       }
       subButtons={[
         <ExternalLink url={getLinkTo('contributors', selector, undefined, true, 'csv')}>
@@ -58,22 +58,22 @@ export const TopButtons = ({ selector, hideSequenceTableButton = false }: Props)
       ]}
     />,
     <ExternalLink url={NextcladeIntegration.getLink(selector)}>
-      <MuiButton variant='contained' color='secondary' size='small'>
+      <Button variant='contained' color='secondary' size='small'>
         Open in Nextclade
-      </MuiButton>
+      </Button>
     </ExternalLink>,
     <ExternalLink url={TaxoniumIntegration.getLink(selector)}>
-      <MuiButton variant='contained' color='secondary' size='small'>
+      <Button variant='contained' color='secondary' size='small'>
         Open in Taxonium
-      </MuiButton>
+      </Button>
     </ExternalLink>,
   ];
   if (!hideSequenceTableButton) {
     buttons.unshift(
       <Link to={`../samples${searchString}`}>
-        <MuiButton variant='contained' color='primary' size='small'>
+        <Button variant='contained' color='primary' size='small'>
           Browse sequences
-        </MuiButton>
+        </Button>
       </Link>
     );
   }

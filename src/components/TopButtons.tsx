@@ -7,7 +7,9 @@ import { TaxoniumIntegration } from '../services/external-integrations/TaxoniumI
 import { downloadAcknowledgementTable } from '../helpers/acknowledgement-pdf';
 import { useQuery } from '../helpers/query-hook';
 import { ContributorsSampleData } from '../data/ContributorsSampleDataset';
-import { Button as MuiButton } from '@mui/material';
+import { Button as MuiButton, MenuItem } from '@mui/material';
+import React from 'react';
+import { SplitButton } from './SplitButton';
 
 type Props = {
   selector: LapisSelector;
@@ -37,15 +39,24 @@ export const TopButtons = ({ selector, hideSequenceTableButton = false }: Props)
         Download metadata
       </MuiButton>
     </ExternalLink>,
-    <MuiButton
-      variant='contained'
-      color='secondary'
-      size='small'
-      disabled={!contributors}
-      onClick={() => contributors && downloadAcknowledgementTable(contributors)}
-    >
-      Download acknowledgement table
-    </MuiButton>,
+    <SplitButton
+      mainButton={
+        <MuiButton
+          variant='contained'
+          color='secondary'
+          size='small'
+          disabled={!contributors}
+          onClick={() => contributors && downloadAcknowledgementTable(contributors)}
+        >
+          Download acknowledgement table
+        </MuiButton>
+      }
+      subButtons={[
+        <ExternalLink url={getLinkTo('contributors', selector, undefined, true, 'csv')}>
+          <MenuItem>Download CSV</MenuItem>
+        </ExternalLink>,
+      ]}
+    />,
     <ExternalLink url={NextcladeIntegration.getLink(selector)}>
       <MuiButton variant='contained' color='secondary' size='small'>
         Open in Nextclade
@@ -70,7 +81,7 @@ export const TopButtons = ({ selector, hideSequenceTableButton = false }: Props)
   return (
     <div className='flex flex-row flex-wrap'>
       {buttons.map((button, index) => (
-        <div className='mx-4 my-1' key={index}>
+        <div className='mx-4 my-1' style={{ zIndex: 10 }} key={index}>
           {button}
         </div>
       ))}

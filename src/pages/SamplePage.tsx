@@ -7,7 +7,7 @@ import { potentiallyPartialDateToString } from '../helpers/date-cache';
 import { MutationList } from '../widgets/MutationList';
 import { MutationData } from '../data/MutationDataset';
 import { NamedCard } from '../components/NamedCard';
-import { ExternalLink } from '../components/ExternalLink';
+import { ExternalLink, LinkStyle } from '../components/ExternalLink';
 import { ContributorsSampleData } from '../data/ContributorsSampleDataset';
 
 export const SamplePage = () => {
@@ -48,8 +48,11 @@ export const SamplePage = () => {
       <div>
         {entry.sraAccession !== 'XXXXXXXX' && (
           <>
-            <ExternalLink url={'https://www.ncbi.nlm.nih.gov/nuccore/' + entry.sraAccession}>
-              <span className='underline'>{entry.sraAccession}</span>
+            <ExternalLink
+              url={'https://www.ncbi.nlm.nih.gov/nuccore/' + entry.sraAccession}
+              style={LinkStyle.SimpleBlue}
+            >
+              {entry.sraAccession}
             </ExternalLink>{' '}
             -{' '}
           </>

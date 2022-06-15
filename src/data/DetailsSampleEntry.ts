@@ -7,6 +7,7 @@ export type DetailsSampleEntry = {
   date: UnifiedDay | null;
   year: number | null;
   month: number | null;
+  dateSubmitted: UnifiedDay | null;
   region: string | null;
   country: string | null;
   division: string | null;

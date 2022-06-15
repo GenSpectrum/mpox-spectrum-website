@@ -38,9 +38,7 @@ export const SamplePage = () => {
   }
 
   const location = [entry.region, entry.country].filter(x => x).join('/');
-  const information = [potentiallyPartialDateToString(entry), location, entry.host, entry.clade]
-    .filter(x => x?.length)
-    .join(' - ');
+  const information = [potentiallyPartialDateToString(entry), location].filter(x => x?.length).join(' - ');
 
   return (
     <div className='mx-2 md:mx-8 my-2'>
@@ -53,6 +51,15 @@ export const SamplePage = () => {
           {entry.accession}
         </ExternalLink>{' '}
         - {information}
+      </div>
+      <div>
+        <strong>Clade:</strong> {entry.clade ?? 'unknown'}
+      </div>
+      <div>
+        <strong>Host:</strong> {entry.host ?? 'unknown'}
+      </div>
+      <div>
+        <strong>Submission date:</strong> {entry.dateSubmitted?.string ?? 'unknown'}
       </div>
       <div>
         <strong>Authors:</strong> {contributors.payload[0].authors ?? 'unknown'}

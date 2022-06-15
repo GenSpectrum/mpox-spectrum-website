@@ -177,6 +177,7 @@ export async function fetchDetailsSamples(
     region: x.region,
     country: x.country,
     division: x.division,
+    dateSubmitted: x.dateSubmitted ? globalDateCache.getDay(x.dateSubmitted) : null,
     clade: x.clade,
     host: x.host,
   }));

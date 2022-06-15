@@ -34,6 +34,7 @@ export const SampleListPage = () => {
       minWidth: 250,
     },
     { field: 'date', headerName: 'Date', minWidth: 150 },
+    { field: 'dateSubmitted', headerName: 'Submission date', minWidth: 150 },
     { field: 'region', headerName: 'Region', minWidth: 200 },
     { field: 'country', headerName: 'Country', minWidth: 250 },
     { field: 'clade', headerName: 'Clade', minWidth: 150 },
@@ -47,6 +48,7 @@ export const SampleListPage = () => {
     return data.payload.map((d, index) => ({
       ...d,
       date: potentiallyPartialDateToString(d),
+      dateSubmitted: d.dateSubmitted?.string,
       id: index,
     }));
   }, [data]);

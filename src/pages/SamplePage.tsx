@@ -14,7 +14,7 @@ export const SamplePage = () => {
   let { sampleName } = useParams();
   const selector: LapisSelector = {
     identifier: {
-      strain: sampleName,
+      accession: sampleName,
     },
   };
   const { data } = useQuery(signal => DetailsSampleData.fromApi(selector, signal), [selector]);
@@ -44,23 +44,21 @@ export const SamplePage = () => {
 
   return (
     <div className='mx-2 md:mx-8 my-2'>
-      <h1>{sampleName}</h1>
+      <h1>{entry.strain}</h1>
       <div>
-        {entry.sraAccession !== 'XXXXXXXX' && (
-          <>
-            <ExternalLink
-              url={'https://www.ncbi.nlm.nih.gov/nuccore/' + entry.sraAccession}
-              style={LinkStyle.SimpleBlue}
-            >
-              {entry.sraAccession}
-            </ExternalLink>{' '}
-            -{' '}
-          </>
-        )}
-        {information}
+        <ExternalLink
+          url={'https://www.ncbi.nlm.nih.gov/nuccore/' + entry.accession}
+          style={LinkStyle.SimpleBlue}
+        >
+          {entry.accession}
+        </ExternalLink>{' '}
+        - {information}
       </div>
       <div>
         <strong>Authors:</strong> {contributors.payload[0].authors ?? 'unknown'}
+      </div>
+      <div>
+        <strong>Institution:</strong> {contributors.payload[0].institution ?? 'unknown'}
       </div>
       <div className='mt-4'>
         <TopButtons selector={selector} hideSequenceTableButton={true} />

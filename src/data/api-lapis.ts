@@ -168,6 +168,7 @@ export async function fetchDetailsSamples(
   const rawBody = (await res.json()) as LapisResponse<any[]>;
   const rawData = _extractLapisData(rawBody);
   return rawData.map(x => ({
+    accession: x.accession,
     strain: x.strain,
     sraAccession: x.sraAccession,
     date: x.date ? globalDateCache.getDay(x.date) : null,
@@ -175,6 +176,7 @@ export async function fetchDetailsSamples(
     month: x.month,
     region: x.region,
     country: x.country,
+    division: x.division,
     clade: x.clade,
     host: x.host,
   }));

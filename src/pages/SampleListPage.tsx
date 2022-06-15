@@ -14,9 +14,9 @@ export const SampleListPage = () => {
 
   const columns: GridColDef[] = [
     {
-      field: 'strain',
-      headerName: 'Strain',
-      minWidth: 250,
+      field: 'accession',
+      headerName: 'Accession',
+      minWidth: 150,
       renderCell: (params: GridRenderCellParams<string>) =>
         params.value ? (
           <Link to={`${encodeURIComponent(params.value)}`}>
@@ -28,11 +28,15 @@ export const SampleListPage = () => {
           <></>
         ),
     },
-    { field: 'sraAccession', headerName: 'SRA accession', minWidth: 150 },
+    {
+      field: 'strain',
+      headerName: 'Strain',
+      minWidth: 250,
+    },
     { field: 'date', headerName: 'Date', minWidth: 150 },
     { field: 'region', headerName: 'Region', minWidth: 200 },
     { field: 'country', headerName: 'Country', minWidth: 250 },
-    { field: 'clade', headerName: 'Clade', minWidth: 100 },
+    { field: 'clade', headerName: 'Clade', minWidth: 150 },
     { field: 'host', headerName: 'Host', minWidth: 200 },
   ];
 

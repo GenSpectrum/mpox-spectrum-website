@@ -6,22 +6,14 @@ import { Utils } from './Utils';
 (pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
 
 export function downloadAcknowledgementTable(contributors: ContributorsSampleDataset) {
-  const groups = Utils.groupBy(
-    contributors.payload,
-    c => `${c.authors}@@@${c.submittingLab}@@@${c.originatingLab}`
-  );
+  const groups = Utils.groupBy(contributors.payload, c => `${c.authors}@@@${c.institution}`);
   const list = [];
   for (let [key, entries] of groups) {
-    const [authors, submittingLab, originatingLab] = key.split('@@@').map(x => (x === 'null' ? null : x));
-    const sequences = entries.map(e =>
-      e.sraAccession && e.sraAccession !== 'XXXXXXXX' ? e.sraAccession : e.strain
-    );
+    const [authors, institution] = key.split('@@@').map(x => (x === 'null' ? null : x));
+    const sequences = entries.map(e => e.accession);
     list.push({ text: authors ?? 'Unknown authors', style: 'authors' });
-    if (submittingLab) {
-      list.push({ text: 'Submitting lab: ' + submittingLab, style: 'labs' });
-    }
-    if (originatingLab) {
-      list.push({ text: 'Submitting lab: ' + originatingLab, style: 'labs' });
+    if (institution) {
+      list.push({ text: 'Institution: ' + institution, style: 'labs' });
     }
     list.push(sequences.join(', '));
   }

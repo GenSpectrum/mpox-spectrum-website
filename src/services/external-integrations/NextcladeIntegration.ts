@@ -9,7 +9,7 @@ export class NextcladeIntegration {
       limit: 200,
     };
     const linkToFasta = getLinkToFasta(false, selector, orderAndLimit);
-    const nextcladePrefix = 'https://nextclade.vercel.app/?dataset-name=monkeypox&input-fasta=';
+    const nextcladePrefix = 'https://master.clades.nextstrain.org/?dataset-name=MPXV&input-fasta=';
     return `${nextcladePrefix}${encodeURIComponent(linkToFasta)}`;
   }
 }

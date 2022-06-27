@@ -14,7 +14,7 @@ export const SampleListPage = () => {
   const { selector } = useExploreUrl();
   const { data } = useQuery(signal => DetailsSampleData.fromApi(selector, signal), [selector]);
   const [selectionModel, setSelectionModel] = useState<any>([]);
-  const [accessions, setAccessions] = useState<any>({ accession: [] });
+  const [accessions, setAccessions] = useState<any>({ identifier: { accession: [] } });
 
   const columns: GridColDef[] = [
     {
@@ -64,16 +64,18 @@ export const SampleListPage = () => {
         : getLinkTo(type, accessions, undefined, true);
     let tempLink = document.createElement('a');
     tempLink.href = fileURL;
-
+    console.log(fileURL);
     tempLink.click();
   }
+
+  console.log('accessions', accessions);
 
   useEffect(() => {
     if (selectionModel.length > 0 && rows) {
       let selected = selectionModel.map((i: number) => {
         return rows[i].accession;
       });
-      setAccessions({ accession: selected });
+      setAccessions({ identifier: { accession: selected } });
     }
   }, [selectionModel, rows]);
 

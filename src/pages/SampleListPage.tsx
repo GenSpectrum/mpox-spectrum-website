@@ -93,57 +93,68 @@ export const SampleListPage = () => {
   return (
     <>
       {selectionModel.length > 0 && (
-        <div className='m-8'>
-          <Button
-            variant='contained'
-            sx={{ ml: 2 }}
-            color='secondary'
-            size='small'
-            onClick={() => handleDownloads('fasta-aligned', 'aligned sequences')}
-          >
-            Download FASTA (aligned)
-          </Button>
-          <Button
-            variant='contained'
-            sx={{ ml: 2 }}
-            color='secondary'
-            size='small'
-            onClick={() => handleDownloads('fasta', 'unaligned sequences')}
-          >
-            Download FASTA (unaligned)
-          </Button>
-          <Button
-            variant='contained'
-            sx={{ ml: 2, mr: 2 }}
-            color='secondary'
-            size='small'
-            onClick={() => handleDownloads('details', 'metadata', 'csv')}
-          >
-            Download metadata
-          </Button>
-          <SplitButton
-            mainButton={
-              <Button
-                variant='contained'
-                color='secondary'
-                size='small'
-                disabled={!contributors}
-                onClick={() => contributors && downloadAcknowledgementTable(contributors)}
-              >
-                Download acknowledgement table
-              </Button>
-            }
-            subButtons={[
-              <ExternalLink url={getLinkTo('contributors', accessions, undefined, true, 'csv')}>
-                <MenuItem>Download CSV</MenuItem>
-              </ExternalLink>,
-            ]}
-          />
-          <ExternalLink url={NextcladeIntegration.getLink(accessions)}>
-            <Button variant='contained' color='secondary' size='small' sx={{ ml: 2 }}>
-              Open in Nextclade
+        <div className='m-8 flex flex-row flex-wrap'>
+          <div className='mx-4 my-1' style={{ zIndex: 10 }}>
+            <Button
+              variant='contained'
+              sx={{ ml: 2 }}
+              color='secondary'
+              size='small'
+              onClick={() => handleDownloads('fasta-aligned', 'aligned sequences')}
+            >
+              Download FASTA (aligned)
             </Button>
-          </ExternalLink>
+          </div>
+          <div className='mx-4 my-1' style={{ zIndex: 10 }}>
+            <Button
+              variant='contained'
+              sx={{ ml: 2 }}
+              color='secondary'
+              size='small'
+              onClick={() => handleDownloads('fasta', 'unaligned sequences')}
+            >
+              Download FASTA (unaligned)
+            </Button>
+          </div>
+          <div className='mx-4 my-1' style={{ zIndex: 10 }}>
+            <Button
+              variant='contained'
+              sx={{ ml: 2 }}
+              color='secondary'
+              size='small'
+              onClick={() => handleDownloads('details', 'metadata', 'csv')}
+            >
+              Download metadata
+            </Button>
+          </div>
+          <div className='mx-4 my-1' style={{ zIndex: 10 }}>
+            <SplitButton
+              margin={true}
+              mainButton={
+                <Button
+                  variant='contained'
+                  color='secondary'
+                  size='small'
+                  disabled={!contributors}
+                  onClick={() => contributors && downloadAcknowledgementTable(contributors)}
+                >
+                  Download acknowledgement table
+                </Button>
+              }
+              subButtons={[
+                <ExternalLink url={getLinkTo('contributors', accessions, undefined, true, 'csv')}>
+                  <MenuItem>Download CSV</MenuItem>
+                </ExternalLink>,
+              ]}
+            />
+          </div>
+          <div className='mx-4 my-1' style={{ zIndex: 10 }}>
+            <ExternalLink url={NextcladeIntegration.getLink(accessions)}>
+              <Button variant='contained' color='secondary' size='small' sx={{ ml: 2 }}>
+                Open in Nextclade
+              </Button>
+            </ExternalLink>
+          </div>
         </div>
       )}
 

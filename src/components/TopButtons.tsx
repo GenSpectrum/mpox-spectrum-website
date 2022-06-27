@@ -14,9 +14,10 @@ import { SplitButton } from './SplitButton';
 type Props = {
   selector: LapisSelector;
   hideSequenceTableButton?: boolean;
+  hideTaxonium?: boolean;
 };
 
-export const TopButtons = ({ selector, hideSequenceTableButton = false }: Props) => {
+export const TopButtons = ({ selector, hideSequenceTableButton = false, hideTaxonium = false }: Props) => {
   const searchString = useLocation().search;
   const { data: contributors } = useQuery(
     signal => ContributorsSampleData.fromApi(selector, signal),
@@ -76,6 +77,10 @@ export const TopButtons = ({ selector, hideSequenceTableButton = false }: Props)
         </Button>
       </Link>
     );
+  }
+
+  if (hideTaxonium) {
+    buttons.pop();
   }
 
   return (

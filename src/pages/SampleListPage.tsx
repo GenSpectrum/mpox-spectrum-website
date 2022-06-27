@@ -64,11 +64,8 @@ export const SampleListPage = () => {
         : getLinkTo(type, accessions, undefined, true);
     let tempLink = document.createElement('a');
     tempLink.href = fileURL;
-    console.log(fileURL);
     tempLink.click();
   }
-
-  console.log('accessions', accessions);
 
   useEffect(() => {
     if (selectionModel.length > 0 && rows) {

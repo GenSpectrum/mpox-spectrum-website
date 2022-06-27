@@ -7,7 +7,12 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
 import { potentiallyPartialDateToString } from '../helpers/date-cache';
 import { getLinkTo } from '../data/api-lapis';
-import { Button } from '@mui/material';
+import { Button, MenuItem } from '@mui/material';
+import { SplitButton } from '../components/SplitButton';
+import { downloadAcknowledgementTable } from '../helpers/acknowledgement-pdf';
+import { ExternalLink } from '../components/ExternalLink';
+import { ContributorsSampleData } from '../data/ContributorsSampleDataset';
+import { NextcladeIntegration } from '../services/external-integrations/NextcladeIntegration';
 
 export const SampleListPage = () => {
   const searchString = useLocation().search;
@@ -15,6 +20,11 @@ export const SampleListPage = () => {
   const { data } = useQuery(signal => DetailsSampleData.fromApi(selector, signal), [selector]);
   const [selectionModel, setSelectionModel] = useState<any>([]);
   const [accessions, setAccessions] = useState<any>({ identifier: { accession: [] } });
+
+  const { data: contributors } = useQuery(
+    signal => ContributorsSampleData.fromApi(accessions, signal),
+    [accessions]
+  );
 
   const columns: GridColDef[] = [
     {
@@ -104,13 +114,36 @@ export const SampleListPage = () => {
           </Button>
           <Button
             variant='contained'
-            sx={{ ml: 2 }}
+            sx={{ ml: 2, mr: 2 }}
             color='secondary'
             size='small'
             onClick={() => handleDownloads('details', 'metadata', 'csv')}
           >
             Download metadata
           </Button>
+          <SplitButton
+            mainButton={
+              <Button
+                variant='contained'
+                color='secondary'
+                size='small'
+                disabled={!contributors}
+                onClick={() => contributors && downloadAcknowledgementTable(contributors)}
+              >
+                Download acknowledgement table
+              </Button>
+            }
+            subButtons={[
+              <ExternalLink url={getLinkTo('contributors', accessions, undefined, true, 'csv')}>
+                <MenuItem>Download CSV</MenuItem>
+              </ExternalLink>,
+            ]}
+          />
+          <ExternalLink url={NextcladeIntegration.getLink(accessions)}>
+            <Button variant='contained' color='secondary' size='small' sx={{ ml: 2 }}>
+              Open in Nextclade
+            </Button>
+          </ExternalLink>
         </div>
       )}
 

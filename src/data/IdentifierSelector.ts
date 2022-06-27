@@ -1,14 +1,27 @@
 export type IdentifierSelector = {
-  accession?: string;
-  strain?: string;
-  sraAccession?: string;
+  accession?: string[];
+  strain?: string[];
+  sraAccession?: string[];
 };
 
+// export function addIdentifierSelectorToUrlSearchParam(selector: IdentifierSelector, params: URLSearchParams) {
+//   for (const k of ['accession', 'strain', 'sraAccession'] as const) {
+//     const value = selector[k];
+//     if (value !== undefined) {
+//       params.set(k, value);
+//     }
+//   }
+// }
+
 export function addIdentifierSelectorToUrlSearchParam(selector: IdentifierSelector, params: URLSearchParams) {
+  let commaSeparatedStr = '';
   for (const k of ['accession', 'strain', 'sraAccession'] as const) {
     const value = selector[k];
     if (value !== undefined) {
-      params.set(k, value);
+      for (let i of value) {
+        commaSeparatedStr += ',' + i;
+      }
+      params.set(k, commaSeparatedStr);
     }
   }
 }

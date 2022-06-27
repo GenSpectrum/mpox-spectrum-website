@@ -12,9 +12,10 @@ import { ContributorsSampleData } from '../data/ContributorsSampleDataset';
 
 export const SamplePage = () => {
   let { sampleName } = useParams();
+
   const selector: LapisSelector = {
     identifier: {
-      accession: sampleName,
+      accession: sampleName ? [sampleName] : [],
     },
   };
   const { data } = useQuery(signal => DetailsSampleData.fromApi(selector, signal), [selector]);

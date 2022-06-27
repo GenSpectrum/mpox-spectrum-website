@@ -14,10 +14,10 @@ export class TaxoniumIntegration {
     // The variant
     const searchList = [];
     if (identifier?.strain) {
-      searchList.push(createField('name', identifier.strain));
+      searchList.push(createField('name', identifier.strain[0]));
     }
     if (identifier?.sraAccession) {
-      searchList.push(createField('meta_sraAccession', identifier.sraAccession));
+      searchList.push(createField('meta_sraAccession', identifier.sraAccession[0]));
     }
     if (variant?.clade) {
       searchList.push(createField('meta_clade', variant.clade));

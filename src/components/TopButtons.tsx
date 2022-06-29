@@ -63,11 +63,6 @@ export const TopButtons = ({ selector, hideSequenceTableButton = false, hideTaxo
         Open in Nextclade
       </Button>
     </ExternalLink>,
-    <ExternalLink url={TaxoniumIntegration.getLink(selector)}>
-      <Button variant='contained' color='secondary' size='small'>
-        Open in Taxonium
-      </Button>
-    </ExternalLink>,
   ];
   if (!hideSequenceTableButton) {
     buttons.unshift(
@@ -79,8 +74,14 @@ export const TopButtons = ({ selector, hideSequenceTableButton = false, hideTaxo
     );
   }
 
-  if (hideTaxonium) {
-    buttons.pop();
+  if (!hideTaxonium) {
+    buttons.push(
+      <ExternalLink url={TaxoniumIntegration.getLink(selector)}>
+        <Button variant='contained' color='secondary' size='small'>
+          Open in Taxonium
+        </Button>
+      </ExternalLink>
+    );
   }
 
   return (

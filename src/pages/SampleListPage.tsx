@@ -3,17 +3,17 @@ import { PageHeaderWithReturn } from '../components/PageHeaderWithReturn';
 import { useQuery } from '../helpers/query-hook';
 import { useExploreUrl } from '../helpers/explore-url';
 import { DetailsSampleData } from '../data/DetailsSampleDataset';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
 import { potentiallyPartialDateToString } from '../helpers/date-cache';
 import { TopButtons } from '../components/TopButtons';
+import { LapisSelector } from '../data/LapisSelector';
 
 export const SampleListPage = () => {
   const searchString = useLocation().search;
   const { selector } = useExploreUrl();
   const { data } = useQuery(signal => DetailsSampleData.fromApi(selector, signal), [selector]);
-  const [selectionModel, setSelectionModel] = useState<any>([]);
-  const [accessions, setAccessions] = useState<any>({ identifier: { accession: [] } });
+  const [selectionModel, setSelectionModel] = useState<number[]>([]);
 
   const columns: GridColDef[] = [
     {
@@ -56,13 +56,14 @@ export const SampleListPage = () => {
     }));
   }, [data]);
 
-  useEffect(() => {
+  const accessions = useMemo((): LapisSelector => {
     if (selectionModel.length > 0 && rows) {
       let selected = selectionModel.map((i: number) => {
         return rows[i].accession;
       });
-      setAccessions({ identifier: { accession: selected } });
+      return { identifier: { accession: selected } };
     }
+    return { identifier: { accession: [] } };
   }, [selectionModel, rows]);
 
   if (!rows) {
@@ -85,11 +86,7 @@ export const SampleListPage = () => {
           checkboxSelection
           selectionModel={selectionModel}
           onSelectionModelChange={newSelection => {
-            let res = [];
-            for (let i of newSelection) {
-              res.push(i);
-            }
-            setSelectionModel(res);
+            setSelectionModel(newSelection.map(i => Number(i)));
           }}
           rows={rows}
           columns={columns}

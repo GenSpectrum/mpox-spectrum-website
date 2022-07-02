@@ -5,10 +5,11 @@ import React from 'react';
 type Props = {
   mainButton: JSX.Element;
   subButtons: JSX.Element[];
+  margin?: boolean;
 };
 
 // Code is based on https://mui.com/material-ui/react-button-group/#split-button
-export const SplitButton = ({ mainButton, subButtons }: Props) => {
+export const SplitButton = ({ mainButton, subButtons, margin }: Props) => {
   const anchorRef = React.useRef<HTMLDivElement>(null);
   const [open, setOpen] = React.useState(false);
 
@@ -31,6 +32,7 @@ export const SplitButton = ({ mainButton, subButtons }: Props) => {
   return (
     <>
       <ButtonGroup
+        sx={{ ml: margin ? 2 : 0 }}
         variant='contained'
         color='secondary'
         size='small'

@@ -14,9 +14,10 @@ import { SplitButton } from './SplitButton';
 type Props = {
   selector: LapisSelector;
   hideSequenceTableButton?: boolean;
+  hideTaxonium?: boolean;
 };
 
-export const TopButtons = ({ selector, hideSequenceTableButton = false }: Props) => {
+export const TopButtons = ({ selector, hideSequenceTableButton = false, hideTaxonium = false }: Props) => {
   const searchString = useLocation().search;
   const { data: contributors } = useQuery(
     signal => ContributorsSampleData.fromApi(selector, signal),
@@ -62,11 +63,6 @@ export const TopButtons = ({ selector, hideSequenceTableButton = false }: Props)
         Open in Nextclade
       </Button>
     </ExternalLink>,
-    <ExternalLink url={TaxoniumIntegration.getLink(selector)}>
-      <Button variant='contained' color='secondary' size='small'>
-        Open in Taxonium
-      </Button>
-    </ExternalLink>,
   ];
   if (!hideSequenceTableButton) {
     buttons.unshift(
@@ -75,6 +71,16 @@ export const TopButtons = ({ selector, hideSequenceTableButton = false }: Props)
           Browse sequences
         </Button>
       </Link>
+    );
+  }
+
+  if (!hideTaxonium) {
+    buttons.push(
+      <ExternalLink url={TaxoniumIntegration.getLink(selector)}>
+        <Button variant='contained' color='secondary' size='small'>
+          Open in Taxonium
+        </Button>
+      </ExternalLink>
     );
   }
 

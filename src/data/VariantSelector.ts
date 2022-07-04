@@ -1,5 +1,6 @@
 export type VariantSelector = {
   clade?: string;
+  lineage?: string;
   nucMutations?: string[];
 };
 
@@ -12,7 +13,7 @@ export function addVariantSelectorToUrlSearchParams(
     const nucMutationsKey = index && index > 0 ? `nucMutations${index}` : 'nucMutations';
     params.set(nucMutationsKey, selector.nucMutations.join(','));
   }
-  for (const k of ['clade'] as const) {
+  for (const k of ['clade', 'lineage'] as const) {
     const value = selector[k];
     if (value !== undefined) {
       const key = index && index > 0 ? `${k}${index}` : k;

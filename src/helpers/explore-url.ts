@@ -25,6 +25,7 @@ export function useExploreUrl(): ExploreUrl {
       host: searchParam.get('host')?.split(',') ?? [],
       variant: {
         clade: searchParam.get('clade') ?? undefined,
+        lineage: searchParam.get('lineage') ?? undefined,
       },
       dateRange: {
         dateFrom: dateFromString ? globalDateCache.getDay(dateFromString) : undefined,

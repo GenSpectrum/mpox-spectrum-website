@@ -10,7 +10,10 @@ export interface Props {
 
 export const HostSelect = ({ selected, onSelect }: Props) => {
   const { data: hostDataset } = useQuery(signal => HostCountSampleData.fromApi({}, signal), []);
-  const allHosts = hostDataset?.payload.filter(x => x.host).map(x => x.host!);
+  const allHosts = hostDataset?.payload
+    .filter(x => x.host)
+    .map(x => x.host!)
+    .sort();
   const allOptions = allHosts && ['All hosts', ...allHosts];
 
   return allOptions ? (

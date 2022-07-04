@@ -13,6 +13,7 @@ import { CladeCountSampleEntry } from './CladeCountSampleEntry';
 import { HostCountSampleEntry } from './HostCountSampleEntry';
 import { DateCountSampleEntry, YearCountSampleEntry } from './DateCountSampleEntry';
 import { ContributorsSampleEntry } from './ContributorsSampleEntry';
+import { LineageCountSampleEntry } from './LineageCountSampleEntry';
 
 const HOST = process.env.REACT_APP_LAPIS_HOST;
 
@@ -126,6 +127,13 @@ export async function fetchCladeCountSamples(
   signal?: AbortSignal
 ): Promise<CladeCountSampleEntry[]> {
   return fetchAggSamples(selector, ['clade'], signal);
+}
+
+export async function fetchLineageCountSamples(
+  selector: LapisSelector,
+  signal?: AbortSignal
+): Promise<LineageCountSampleEntry[]> {
+  return fetchAggSamples(selector, ['lineage'], signal);
 }
 
 export async function fetchHostCountSamples(

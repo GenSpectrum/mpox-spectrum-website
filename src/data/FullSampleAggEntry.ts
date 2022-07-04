@@ -9,10 +9,19 @@ export type FullSampleAggEntry = {
   division: string | null;
   host: string | null;
   clade: string | null;
+  lineage: string | null;
   count: number;
 };
 
-export type FullSampleAggEntryField = 'date' | 'region' | 'country' | 'division' | 'host' | 'clade' | 'count';
+export type FullSampleAggEntryField =
+  | 'date'
+  | 'region'
+  | 'country'
+  | 'division'
+  | 'host'
+  | 'clade'
+  | 'lineage'
+  | 'count';
 
 export type FullSampleAggEntryRaw = Omit<FullSampleAggEntry, 'date'> & {
   date: string | null;

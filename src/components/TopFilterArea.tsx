@@ -6,6 +6,7 @@ import { DateRangeSelect } from './DateRangeSelect';
 import { DateRangeSelector } from '../data/DateRangeSelector';
 import { HostSelect } from './HostSelect';
 import { HostSelector } from '../data/HostSelector';
+import { LineageSelect } from './LineageSelect';
 
 type Props = {
   location: LocationSelector;
@@ -38,6 +39,9 @@ export const TopFilterArea = ({
       </div>
       <div className='w-72'>
         <CladeSelect selected={variant} onSelect={setVariant} />
+      </div>
+      <div className='w-72'>
+        <LineageSelect selected={variant} onSelect={setVariant} />
       </div>
       <div className='w-72'>
         <HostSelect selected={host} onSelect={setHost} />

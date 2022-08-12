@@ -5,6 +5,7 @@ import {
   LocationSelector,
 } from '../data/LocationSelector';
 import { LocationService } from '../services/LocationService';
+import { useQuery } from '../helpers/query-hook';
 
 export interface Props {
   selected: LocationSelector;
@@ -12,13 +13,18 @@ export interface Props {
 }
 
 export const LocationSelect = ({ selected, onSelect }: Props) => {
+  const { data: countries } = useQuery(_ => LocationService.getCountries(), []);
+  if (!countries) {
+    return <></>;
+  }
+
   const geoOptions: { group: string; place: string; code?: string }[] = [{ group: 'World', place: 'World' }];
   geoOptions.push(
     ...LocationService.getRegions().map(region => ({
       group: 'Regions',
       place: region,
     })),
-    ...LocationService.getCountries().map(country => ({
+    ...countries.sort().map(country => ({
       group: 'Countries',
       place: country,
       code: LocationService.getIsoAlpha2Code(country),

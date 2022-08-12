@@ -12,5 +12,6 @@ export type DetailsSampleEntry = {
   country: string | null;
   division: string | null;
   clade: string | null;
+  lineage: string | null;
   host: string | null;
 };

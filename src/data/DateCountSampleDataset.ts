@@ -1,10 +1,17 @@
 import { Dataset } from './Dataset';
 import { LapisSelector } from './LapisSelector';
-import { DateCountSampleEntry, WeekCountSampleEntry, YearCountSampleEntry } from './DateCountSampleEntry';
-import { fetchDateCountSamples, fetchYearCountSamples } from './api-lapis';
+import {
+  DateCountSampleEntry,
+  MonthCountSampleEntry,
+  WeekCountSampleEntry,
+  YearCountSampleEntry,
+} from './DateCountSampleEntry';
+import { fetchDateCountSamples, fetchMonthCountSamples, fetchYearCountSamples } from './api-lapis';
 import { Utils } from '../helpers/Utils';
 
 export type DateCountSampleDataset = Dataset<LapisSelector, DateCountSampleEntry[]>;
+
+export type MonthCountSampleDataset = Dataset<LapisSelector, MonthCountSampleEntry[]>;
 
 export type YearCountSampleDataset = Dataset<LapisSelector, YearCountSampleEntry[]>;
 
@@ -23,6 +30,16 @@ export class DateCountSampleData {
     return {
       selector: selector,
       payload: await fetchYearCountSamples(selector, signal),
+    };
+  }
+
+  static async monthCountFromApi(
+    selector: LapisSelector,
+    signal?: AbortSignal
+  ): Promise<MonthCountSampleDataset> {
+    return {
+      selector: selector,
+      payload: await fetchMonthCountSamples(selector, signal),
     };
   }
 

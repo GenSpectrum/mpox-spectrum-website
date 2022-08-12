@@ -14,7 +14,7 @@ export const SampleListPage = () => {
   const { selector } = useExploreUrl();
   const { data } = useQuery(signal => DetailsSampleData.fromApi(selector, signal), [selector]);
   const [selectionModel, setSelectionModel] = useState<number[]>([]);
-
+  console.log(data);
   const columns: GridColDef[] = [
     {
       field: 'accession',
@@ -41,6 +41,7 @@ export const SampleListPage = () => {
     { field: 'region', headerName: 'Region', minWidth: 200 },
     { field: 'country', headerName: 'Country', minWidth: 250 },
     { field: 'clade', headerName: 'Clade', minWidth: 150 },
+    { field: 'lineage', headerName: 'Lineage', minWidth: 150 },
     { field: 'host', headerName: 'Host', minWidth: 200 },
   ];
 

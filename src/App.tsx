@@ -21,7 +21,7 @@ function App() {
           </div>
           {/* Main content */}
           <Routes>
-            <Route path='/' element={<Navigate to='explore' />} />
+            <Route path='/' element={<Navigate to='explore?yearFrom=2022' />} />
             <Route path='explore' element={<ExplorePage />} />
             <Route path='samples' element={<SampleListPage />} />
             <Route path='samples/:sampleName' element={<SamplePage />} />

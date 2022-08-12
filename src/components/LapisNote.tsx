@@ -13,7 +13,10 @@ export const LapisNote = () => {
         are from databases not in the public domain (such as e.g. GISAID EpiPox) due to re-sharing
         restrictions. The data presented on this dashboard are also available through a public web API: visit
         the{' '}
-        <ExternalLink url='https://mpox-lapis.genspectrum.org' style={LinkStyle.SimpleBlue}>
+        <ExternalLink
+          url='https://lapis-docs.readthedocs.io/en/latest/reference/monkeypox.html'
+          style={LinkStyle.SimpleBlue}
+        >
           Mpox-LAPIS documentation
         </ExternalLink>{' '}
         for details.

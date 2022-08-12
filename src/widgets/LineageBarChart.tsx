@@ -23,7 +23,7 @@ export const LineageBarChart = ({ lineageCounts }: LineageBarChartProps) => {
         <XAxis dataKey='lineage' type='category' />
         <YAxis />
         <Tooltip />
-        <Bar dataKey='count' fill='#8884d8' />
+        <Bar dataKey='count' fill='#228b22' />
       </BarChart>
     </ResponsiveContainer>
   );

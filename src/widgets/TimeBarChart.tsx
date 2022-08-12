@@ -78,7 +78,7 @@ export const TimeBarChart = ({ dateCounts, monthCounts, yearCounts }: Props) => 
           />
           <YAxis />
           <Tooltip labelFormatter={(value: unknown) => 'Month ' + value} />
-          <Bar dataKey='count' fill='#8884d8' />
+          <Bar dataKey='count' fill='#228b22' />
         </BarChart>
       </ResponsiveContainer>
     );
@@ -98,7 +98,7 @@ export const TimeBarChart = ({ dateCounts, monthCounts, yearCounts }: Props) => 
           />
           <YAxis />
           <Tooltip labelFormatter={(value: unknown) => 'Week ' + value} />
-          <Bar dataKey='count' fill='#8884d8' />
+          <Bar dataKey='count' fill='#228b22' />
         </BarChart>
       </ResponsiveContainer>
     );
@@ -109,7 +109,7 @@ export const TimeBarChart = ({ dateCounts, monthCounts, yearCounts }: Props) => 
           <XAxis dataKey='year' type='number' domain={['dataMin', 'dataMax']} />
           <YAxis />
           <Tooltip />
-          <Bar dataKey='count' fill='#8884d8' />
+          <Bar dataKey='count' fill='#228b22' />
         </BarChart>
       </ResponsiveContainer>
     );

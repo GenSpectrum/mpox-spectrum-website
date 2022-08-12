@@ -187,6 +187,7 @@ export async function fetchDetailsSamples(
     division: x.division,
     dateSubmitted: x.dateSubmitted ? globalDateCache.getDay(x.dateSubmitted) : null,
     clade: x.clade,
+    lineage: x.lineage,
     host: x.host,
   }));
 }

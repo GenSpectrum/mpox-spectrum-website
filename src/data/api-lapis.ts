@@ -11,7 +11,7 @@ import { DetailsSampleEntry } from './DetailsSampleEntry';
 import { globalDateCache } from '../helpers/date-cache';
 import { CladeCountSampleEntry } from './CladeCountSampleEntry';
 import { HostCountSampleEntry } from './HostCountSampleEntry';
-import { DateCountSampleEntry, YearCountSampleEntry } from './DateCountSampleEntry';
+import { DateCountSampleEntry, MonthCountSampleEntry, YearCountSampleEntry } from './DateCountSampleEntry';
 import { ContributorsSampleEntry } from './ContributorsSampleEntry';
 import { LineageCountSampleEntry } from './LineageCountSampleEntry';
 
@@ -106,6 +106,13 @@ export async function fetchDateCountSamples(
   signal?: AbortSignal
 ): Promise<DateCountSampleEntry[]> {
   return fetchAggSamples(selector, ['date'], signal);
+}
+
+export async function fetchMonthCountSamples(
+  selector: LapisSelector,
+  signal?: AbortSignal
+): Promise<MonthCountSampleEntry[]> {
+  return fetchAggSamples(selector, ['year', 'month'], signal);
 }
 
 export async function fetchYearCountSamples(

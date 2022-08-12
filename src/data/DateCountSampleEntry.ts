@@ -5,6 +5,12 @@ export type DateCountSampleEntry = {
   count: number;
 };
 
+export type MonthCountSampleEntry = {
+  year: number | null;
+  month: number | null;
+  count: number;
+};
+
 export type YearCountSampleEntry = {
   year: number | null;
   count: number;

@@ -12,6 +12,8 @@ import { TopButtons } from '../components/TopButtons';
 import { LapisNote } from '../components/LapisNote';
 import { TimeBarChart } from '../widgets/TimeBarChart';
 import { DateCountSampleData } from '../data/DateCountSampleDataset';
+import { LineageBarChart } from '../widgets/LineageBarChart';
+import { LineageCountSampleData } from '../data/LineageCountSampleDataset';
 
 export const ExplorePage = () => {
   const { selector, setSelector } = useExploreUrl();
@@ -25,6 +27,11 @@ export const ExplorePage = () => {
 
   const { data: yearCounts } = useQuery(
     signal => DateCountSampleData.yearCountFromApi(selector, signal),
+    [selector]
+  );
+
+  const { data: lineageCounts } = useQuery(
+    signal => LineageCountSampleData.fromApi(selector, signal),
     [selector]
   );
 
@@ -64,7 +71,7 @@ export const ExplorePage = () => {
   );
 
   const mainContent =
-    dateCounts && monthCounts && yearCounts && countryCounts && nucMutationCounts ? (
+    dateCounts && monthCounts && yearCounts && lineageCounts && countryCounts && nucMutationCounts ? (
       <>
         <CoreMetrices countryCounts={countryCounts} />
         <PackedGrid maxColumns={2}>
@@ -72,6 +79,13 @@ export const ExplorePage = () => {
             <NamedCard title='Sequences over time'>
               <div style={{ height: 400 }}>
                 <TimeBarChart dateCounts={dateCounts} monthCounts={monthCounts} yearCounts={yearCounts} />
+              </div>
+            </NamedCard>
+          </GridCell>
+          <GridCell minWidth={600}>
+            <NamedCard title='Lineages'>
+              <div style={{ height: 400 }}>
+                <LineageBarChart lineageCounts={lineageCounts} />
               </div>
             </NamedCard>
           </GridCell>

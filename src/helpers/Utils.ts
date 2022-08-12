@@ -1,4 +1,19 @@
 export class Utils {
+  static sortByField<T, K>(arr: T[], keyFunc: (arrayElement: T) => K): T[] {
+    return arr
+      .map(x => ({ key: keyFunc(x), value: x }))
+      .sort((a, b) => {
+        if (a.key > b.key) {
+          return 1;
+        } else if (a.key === b.key) {
+          return 0;
+        } else {
+          return -1;
+        }
+      })
+      .map(x => x.value);
+  }
+
   static groupBy<T, K>(arr: T[], keyFunc: (arrayElement: T) => K): Map<K, T[]> {
     const grouped = new Map();
     for (const el of arr) {
